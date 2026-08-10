@@ -1,0 +1,1171 @@
+<?php
+
+use Illuminate\Support\Facades\Route; 
+use App\Http\Controllers\Mastercontroller;
+use App\Http\Controllers\HomeController; 
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\ChildcategoryController; 
+use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TrackorderController;
+use App\Http\Controllers\SubscriberController; 
+use App\Http\Controllers\Admin\UserDashboardController;
+use App\Http\Controllers\SocialShareButtonsController;
+use Illuminate\Support\Facades\Artisan;
+      
+//        
+           
+/*       
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| contains the "web" middleware group. Now create something great!
+|
+*/
+// Route::get('/posts', [SocialShareButtonsController::class,'ShareWidget']);
+
+Route::get('profile', [FrontendController::class, 'profileindex']);
+Route::get('profile/{number}', [FrontendController::class, 'profilenumberindex']);
+Route::get('notexist', [FrontendController::class, 'notexist']);
+
+Route::get('/load-more-portfolios', [FrontendController::class, 'loadMorePortfolios'])->name('load.more.portfolios');
+
+Route::post('/uploaddoc',[FrontendController::class,'uploaddoc'])->name('uploaddoc');
+Route::get(url('/{number}'), [FrontendController::class, 'profilenumberdata']);
+Route::get('blog-page', [FrontendController::class, 'blogpage']);
+Route::get('portfolio-details', [FrontendController::class, 'portfoliodetails']);
+Route::get('Corporate', [FrontendController::class, 'corporate'])->name('corporate');
+Route::get('jointeam', [FrontendController::class, 'jointeam'])->name('jointeam');
+Route::get('raf_create_vcard/{customer}',[FrontendController::class,'raf_create_vcard'])->name('raf_create_vcard');
+Route::post('product_enquery',[FrontendController::class,'product_enquery']);
+
+Route::view('trackyourorder', 'userdashboard/order/trackyourorder');
+Route::view('landing_profilemeet', 'frontend/profilemeetlanding/index');
+Route::get('faq',[FrontendController::class,'faq']);
+
+// Theme Preview Routes
+Route::get('theme-preview-test', function() {
+    return response()->json([
+        'status' => 'OK',
+        'message' => 'Theme preview routes are working',
+        'profession_themes_exist' => class_exists('App\\Models\\ProfessionTheme'),
+        'config_exists' => config('theme-samples.medical') !== null,
+        'views_exist' => view()->exists('frontend.profile-themes.medical'),
+    ]);
+});
+
+// Debug route to test all theme functionality
+Route::get('theme-debug', function() {
+    $debug = [];
+
+    // Test ProfessionTheme model
+    $debug['model_exists'] = class_exists('App\\Models\\ProfessionTheme');
+    $debug['themes_count'] = 0;
+    try {
+        $debug['themes_count'] = \App\Models\ProfessionTheme::count();
+        $debug['sample_theme'] = \App\Models\ProfessionTheme::first();
+    } catch (\Exception $e) {
+        $debug['model_error'] = $e->getMessage();
+    }
+
+    // Test config file
+    $debug['config_loaded'] = config('theme-samples.medical') !== null;
+    $debug['config_keys'] = config('theme-samples') ? array_keys(config('theme-samples')) : [];
+
+    // Test views
+    $debug['preview_wrapper_exists'] = view()->exists('frontend.profile-themes.preview-wrapper');
+    $debug['medical_template_exists'] = view()->exists('frontend.profile-themes.medical');
+
+    // Test FrontendController method
+    $debug['frontend_controller_exists'] = class_exists('App\\Http\\Controllers\\FrontendController');
+    $debug['frontend_method_exists'] = method_exists('App\\Http\\Controllers\\FrontendController', 'themePreview');
+
+    // Test AdminController method
+    $debug['admin_controller_exists'] = class_exists('App\\Http\\Controllers\\Admin\\AdminController');
+    $debug['admin_method_exists'] = method_exists('App\\Http\\Controllers\\Admin\\AdminController', 'themeLivePreview');
+
+    // Test routes
+    $routes = \Route::getRoutes();
+    $debug['theme_preview_route'] = $routes->getByName('theme.preview') ? 'exists' : 'missing';
+    $debug['theme_live_preview_route'] = $routes->getByName('theme.live.preview') ? 'exists' : 'missing';
+
+    // Test RestaurantInfo model
+    $debug['restaurant_info_model'] = class_exists('App\\Models\\RestaurantInfo');
+
+    return response()->json($debug, 200, [], JSON_PRETTY_PRINT);
+});
+
+Route::get('theme-preview/{slug}', [FrontendController::class, 'themePreview'])->name('theme.preview');
+
+Route::get('blog-list',[FrontendController::class,'blog_list']);
+Route::get('blog-details',[FrontendController::class,'blog_details']);
+
+// Pre order frontend
+Route::get('preorder',[FrontendController::class,'preorder']);
+
+Route::POST('savepreorder',[FrontendController::class,'savepreorder']);
+
+Route::view('loginn', 'frontend/loginn');
+Route::view('/term_condition','frontend/term_condition')->name('term_condition');
+
+// Route::view('/privecy_policy','frontend/privecy_policy')->name('privecy_policy');
+
+/* anand start code */
+Route::view('/privacy_policy','frontend/privacy_policy')->name('privacy_policy');
+
+Route::view('/terms_&_condition','frontend/terms_&_condition')->name('terms_&_condition');
+Route::view('/return_&_refund_policy','frontend/return_&_refund_policy')->name('return_&_refund_policy');
+Route::view('/shipping_&_delivery_policy','frontend/shipping_&_delivery_policy')->name('shipping_&_delivery_policy');
+
+
+/*anand end code */
+
+
+Route::view('/header','frontend/header')->name('header');
+
+Route::view('/profile_view','userdashboard/profile/proflle_view');
+
+Route::get('/order.status', [AdminController::class, 'changeorderstatus']);
+
+ 
+// Route::view('/uploadfile', 'userdashboard.uploadfile.add_upload');
+Route::get('/uploadfile',[FrontendController::class,'mydocument']);
+Route::get('/deletefile/{id}/{file}',[FrontendController::class,'deletefile']);
+Route::get('/leads',[FrontendController::class,'leads']);
+Route::post('/message',[FrontendController::class,'message'])->name('message');
+// profile_view
+//userdashboard
+
+Route::get('userdashboard', [AdminController::class, 'userdashboard']);
+
+Route::get('myorder', [AdminController::class, 'myorder']);
+Route::get('goldenuser', [AdminController::class, 'goldenuser']);
+
+
+Route::get('qrcode', [AdminController::class, 'qrcode']);
+Route::get('userorderview{id}', [AdminController::class, 'userorderview']);
+Route::get('updateuserprofile', [AdminController::class, 'showuserprofile']);
+Route::post('updateuserprofile_store', [AdminController::class, 'updateuserprofile']);
+
+// Profile Theme Selection
+Route::get('profile-theme', [AdminController::class, 'profileTheme']);
+Route::post('profile-theme/select', [AdminController::class, 'selectProfileTheme']);
+Route::post('profile-theme/customize', [AdminController::class, 'saveThemeCustomization']);
+Route::get('theme-live-preview/{themeId}', [AdminController::class, 'themeLivePreview'])->name('theme.live.preview');
+
+// Profile Visibility Settings
+Route::get('profile-settings/visibility', [AdminController::class, 'visibilitySettings'])->name('profile.visibility');
+Route::post('profile-settings/visibility/update', [AdminController::class, 'updateVisibilitySettings'])->name('profile.visibility.update');
+Route::post('profile-settings/visibility/reset', [AdminController::class, 'resetVisibilitySettings'])->name('profile.visibility.reset');
+
+// Menu Management (for Restaurant Theme)
+Route::get('mymenu', [AdminController::class, 'myMenu']);
+Route::get('mymenu/category/create', [AdminController::class, 'createMenuCategory']);
+Route::post('mymenu/category/store', [AdminController::class, 'storeMenuCategory']);
+Route::get('mymenu/category/{id}/edit', [AdminController::class, 'editMenuCategory']);
+Route::post('mymenu/category/{id}/update', [AdminController::class, 'updateMenuCategory']);
+Route::post('mymenu/category/{id}/toggle', [AdminController::class, 'toggleMenuCategory']);
+Route::delete('mymenu/category/{id}/delete', [AdminController::class, 'deleteMenuCategory']);
+Route::post('mymenu/category/reorder', [AdminController::class, 'reorderMenuCategories']);
+Route::get('mymenu/category/{id}/items', [AdminController::class, 'categoryItems']);
+Route::get('mymenu/item/create', [AdminController::class, 'createMenuItem']);
+Route::post('mymenu/item/store', [AdminController::class, 'storeMenuItem']);
+Route::get('mymenu/item/{id}/edit', [AdminController::class, 'editMenuItem']);
+Route::post('mymenu/item/{id}/update', [AdminController::class, 'updateMenuItem']);
+Route::post('mymenu/item/{id}/toggle', [AdminController::class, 'toggleMenuItem']);
+Route::post('mymenu/item/{id}/bestseller', [AdminController::class, 'toggleMenuItemBestseller']);
+Route::delete('mymenu/item/{id}/delete', [AdminController::class, 'deleteMenuItem']);
+
+Route::get('changepassword', [AdminController::class, 'changepassword']);
+Route::post('updatepassword', [AdminController::class, 'updatepassword']);
+
+Route::get('myqualification', [AdminController::class, 'myqualification']);
+Route::get('addqualification', [AdminController::class, 'addqualification']);
+Route::post('savequalifiaction', [AdminController::class, 'savequalifiaction']);
+Route::get('editqualification{id}',[AdminController::class,'editqualification']);
+Route::POST('updatequalifiaction',[AdminController::class,'updatequalification']);
+Route::get('deletequalification{id}',[AdminController::class,'deletequalification']);
+
+
+Route::get('myprofessions', [AdminController::class, 'myprofessions']);
+Route::get('addprofessions', [AdminController::class, 'addprofessions']);
+Route::post('saveprofessions', [AdminController::class, 'saveprofessions']);
+Route::get('editprofessions{id}',[AdminController::class,'editprofessions']);
+Route::POST('updateprofessions',[AdminController::class,'updateprofessions']);
+Route::get('deleteprofessions{id}',[AdminController::class,'deleteprofessions']);
+Route::get('viewprofessions{id}',[AdminController::class,'viewprofessions']);
+
+
+
+Route::get('mythought', [AdminController::class, 'mythought']);
+Route::get('addthought', [AdminController::class, 'addthought']);
+Route::post('savethought', [AdminController::class, 'savethought']);
+Route::get('editthought{id}',[AdminController::class,'editthought']);
+Route::POST('updatethought',[AdminController::class,'updatethought']);
+Route::get('deletethought{id}',[AdminController::class,'deletethought']);
+
+// personal photos
+Route::get('myportfolio', [AdminController::class, 'myportfolio']);
+Route::get('addportfolio', [AdminController::class, 'addportfolio']);
+Route::post('saveportfolio', [AdminController::class, 'saveportfolio']);
+Route::get('editportfolio{id}',[AdminController::class,'editportfolio']);
+Route::POST('updateportfolio',[AdminController::class,'updateportfolio']);
+Route::get('deleteportfolio{id}',[AdminController::class,'deleteportfolio']);
+
+// professonal photos
+
+Route::get('professional_photos', [AdminController::class, 'professional_photos']);
+Route::get('addprofessional_photo', [AdminController::class, 'addprofessional_photo']);
+Route::post('saveprofessional_photo', [AdminController::class, 'saveprofessional_photo']);
+Route::get('editprofessional_photo{id}',[AdminController::class,'editprofessional_photo']);
+Route::POST('updateprofessional_photo',[AdminController::class,'updateprofessional_photo']);
+Route::get('deleteprofessional_photo{id}',[AdminController::class,'deleteprofessional_photo']);
+//
+
+
+Route::get('myvideos', [AdminController::class, 'myvideos']);
+Route::get('addmyvideo', [AdminController::class, 'addmyvideo']);
+Route::post('savemyvideo', [AdminController::class, 'savemyvideo']);
+Route::get('editmyvideo{id}',[AdminController::class,'editmyvideo']);
+Route::POST('updatemyvideo',[AdminController::class,'updatemyvideo']);
+Route::get('deletemyvideo{id}',[AdminController::class,'deletemyvideo']);
+
+
+// my products
+
+Route::get('myproducts', [AdminController::class, 'myproducts']);
+Route::get('addmyproduct', [AdminController::class, 'addmyproduct']);
+Route::post('savemyproduct', [AdminController::class, 'savemyproduct']);
+Route::get('editmyproduct{id}',[AdminController::class,'editmyproduct']);
+Route::put('updatemyproduct',[AdminController::class,'updatemyproduct']);
+Route::get('deletemyproduct{id}',[AdminController::class,'deletemyproduct']);
+//
+
+Route::get('mysocial', [AdminController::class, 'mysocial']);
+Route::get('addsocial', [AdminController::class, 'addsocial']);
+Route::post('savesocial', [AdminController::class, 'savesocial']);
+Route::get('editsocial{id}',[AdminController::class,'editsocial']);
+Route::POST('updatesocial',[AdminController::class,'updatesocial']);
+Route::get('deletesocial{id}',[AdminController::class,'deletesocial']);
+
+Route::get('mysocialprofile', [AdminController::class, 'mysocialprofile']);
+Route::post('/update_menu',[AdminController::class, 'update_profile_menu']);
+Route::get('/add_logo',[AdminController::class, 'add_logo']);
+Route::post('/save_logo',[AdminController::class, 'save_logo']);
+Route::get('/add_block',[AdminController::class, 'add_block']);
+Route::post('/saveBlock',[AdminController::class, 'saveBlock']);
+Route::get('edit_blogs/{id}',[AdminController::class, 'edit_blogs']);
+Route::get('/add_google_map',[AdminController::class, 'add_google_map']);
+Route::post('/saveMap',[AdminController::class, 'save_map']);
+Route::get('/add_download',[AdminController::class, 'add_download']);
+Route::post('/savePdf',[AdminController::class, 'save_pdf']);
+Route::delete('deletePdf/{id}', [AdminController::class, 'delete_pdf'])->name('delete_pdf');
+Route::get('/add_achievment',[AdminController::class, 'add_achievment']);
+Route::post('/saveAchiev',[AdminController::class, 'save_achievment']);
+Route::delete('deleteAchiev/{id}', [AdminController::class, 'delete_achievment'])->name('deleteAchiev');
+Route::post('/update_Block',[AdminController::class, 'update_Block']);
+Route::get('/delete_blogs/{id}',[AdminController::class, 'delete_blogs']);
+Route::get('/add_client',[AdminController::class, 'add_client']);
+Route::post('/saveClient',[AdminController::class, 'saveClient']);
+Route::get('/edit_client/{id}',[AdminController::class, 'edit_client']);
+Route::post('/update_client',[AdminController::class, 'update_client']);
+Route::get('/delete_client/{id}',[AdminController::class, 'delete_client']);
+
+Route::view('socialadd', 'admin/userdashboard/social/add');
+Route::view('sociallist', 'admin/userdashboard/social/index');
+Route::view('socialedit', 'admin/userdashboard/social/edit');
+
+
+
+
+
+//heading routes start
+
+Route::post('/add_qual_hed', [AdminController::class, 'add_qual_hed']);
+//heading routes end
+
+
+
+
+//userdashboard end
+
+
+// new social user dashboard
+
+Route::view('newindex', 'userdashboard/index');
+Route::view('newmyprofile', 'userdashboard/profile/myprofile');
+//Route::get('newmyprofile', [UserDashboardController::class, 'userdashboard']);
+
+
+Route::view('qualificationlist', 'userdashboard/myqualification/index');
+Route::view('qualificationadd', 'userdashboard/myqualification/add');
+Route::view('qualificationedit', 'userdashboard/myqualification/edit');
+
+// profession
+Route::view('professoinlist', 'userdashboard/profession/index');
+Route::view('professoinadd', 'userdashboard/profession/add');
+Route::view('professoinedit', 'userdashboard/profession/edit');
+Route::view('professoinview', 'userdashboard/profession/view_profession');
+
+//new social end
+Route::view('thoughtlist', 'userdashboard/thought/index');
+Route::view('thoughtadd', 'userdashboard/thought/add');
+Route::view('thoughtedit', 'userdashboard/thought/edit');
+
+//new photos end
+Route::view('photoslist', 'userdashboard/photos/index');
+Route::view('photosadd', 'userdashboard/photos/add');
+Route::view('photosedit', 'userdashboard/photos/edit');
+
+//new photos end
+Route::view('sociallist', 'userdashboard/social/index');
+Route::view('socialadd', 'userdashboard/social/add');
+Route::view('socialedit', 'userdashboard/social/edit');
+
+Route::view('newchangepassword', 'userdashboard/change_password');
+Route::view('neworder', 'userdashboard/order/neworderlist');
+Route::view('neworderview', 'userdashboard/order/neworderview');
+
+Route::get('new-cart', [FrontendController::class, 'cartlist'])->name('new-cart');
+Route::POST('setcoupon', [FrontendController::class, 'setcoupon'])->name('setcoupon');
+
+/* anand start code */
+Route::POST('setagentcode', [FrontendController::class, 'setagentcode'])->name('setagentcode');
+
+Route::get('remove-agent-code', [FrontendController::class, 'removeAgentCode'])->name('removeAgentCode');
+
+// Get Titles from profile show types in main.js
+Route::get('/get-titles', [FrontendController::class,'getTitles']);
+//
+
+/* anand end code */ 
+
+Route::get('remove-coupon-code', [FrontendController::class, 'removeCouponCode'])->name('removeCouponCode');
+// Route::view('new-cart', 'frontend/shoping_cart');
+Route::get('new-checkout', [FrontendController::class, 'checkout'])->name('checkout');
+// Route::view('new-checkout', 'frontend/checkout');
+Route::get('Product-details-new/{id}', [FrontendController::class, 'Product_details'])->name('Product-details-new');
+// Route::view('', 'frontend/product-details');
+
+// for sabpaisa payment gatway anand start code 
+
+    // // for send and get request to new-checkout page start
+    // Route::post('/new-checkout', [FrontendController::class, 'processForm'])->name('process.form');
+    
+    // Route::view('/shipping', 'shipping')->name('shipping');
+    
+    // // for send and get request to new-checkout page end
+    
+    // //    
+    // Route::view("Authentication","frontend.Authentication");
+    // //
+    
+    // Route::post('/SabPaisaPostPgResponse', function () {
+    //     // Disable CSRF protection for debugging
+    //     return view('frontend.SabPaisaPostPgResponse');
+    // })->withoutMiddleware(['web', 'csrf']);
+    // //
+     
+     
+// for sabpaisa payment gatway anand end code 
+
+ 
+// for phone pay payment gatway anand start code 
+
+
+    Route::get('/phonePe', [FrontendController::class, 'phonePe'])->name('phonePe');
+    // Route::any('phonepe-response',[FrontendController::class,'response'])->name('response');
+
+    Route::any('phonepe-response',[FrontendController::class,'response'])->name('response');
+
+
+Route::view('/thankyou','frontend.thankyou');
+
+// for phone pay payment gatway anand end code 
+
+// for if not have order in order table so redirect error page
+Route::view('/purchase_error','frontend.purchase_error');
+//
+
+Route::view('/','frontend.index');
+Route::get('Login', [FrontendController::class, 'login'])->name('login');
+
+// gold login
+Route::get('Logingold', [FrontendController::class, 'logingold'])->name('logingold');
+//
+
+Route::get('signin', [FrontendController::class, 'signin'])->name('signin');
+// form register
+Route::post('registeruser/register_store',[FrontendController::class, 'register_store'])->name('registeruser.register_store');
+//   
+
+// login user
+Route::post('loginuser/login_store',[FrontendController::class, 'login_store'])->name('loginuser.login_store');
+
+//
+
+
+// login user
+Route::get('loginuser/theme_change',[FrontendController::class, 'theme_change'])->name('theme_change');
+Route::get('loginuser/theme_change_profile',[FrontendController::class, 'theme_change_profile'])->name('theme_change_profile');
+
+
+//
+
+
+// login gold user
+Route::post('logingolduser/login_gold_store',[FrontendController::class, 'login_gold_store'])->name('loginuser.login_gold_store');
+
+//
+
+
+// Forgot Password
+Route::get('forgot_password', [FrontendController::class, 'forgot_password'])->name('forgot_password');
+
+Route::get('/set_forgot_password',[FrontendController::class,'set_forgot_password']);
+
+Route::post('update_forget_password', [FrontendController::class, 'update_forget_password']);
+
+//  
+
+// anand start code for forgot password 
+ 
+Route::post('forgot_password_email',[FrontendController::class, 'forgot_password_email'])->name('forgot_password_email');
+
+// Route::get('passwordreset/{secret}',[FrontendController::class, 'passwordReset']);
+// Route::get('passwordreset', [FrontendController::class, 'passwordReset'])->name('password.reset');
+Route::get('passwordreset/{email}', [FrontendController::class, 'passwordReset'])->name('password.reset');
+
+//Reset Password form
+Route::post('forgot_reset_password',[FrontendController::class, 'forgot_reset_password'])->name('forgot_reset_password');
+//
+
+// anand end code for forgot password
+  
+Route::get('registration',[FrontendController::class,'registration'])->name('registration');
+Route::post('registration_process',[FrontendController::class,'registration_process'])->name('registration.registration_process');
+Route::post('login_process',[FrontendController::class,'login_process'])->name('login.login_process');
+Route::get('logout', function () {  
+    session()->forget('FRONT_USER_LOGIN');
+    session()->forget('FRONT_USER_ID');  
+    session()->forget('FRONT_USER_NAME'); 
+    session()->forget('product_id'); 
+    return redirect('/'); 
+}); 
+     
+   
+Route::get('About-Us', [FrontendController::class, 'about'])->name('about');
+Route::get('Contact-Us', [FrontendController::class, 'contact'])->name('contact');
+Route::post('shopingcart/{id}', [FrontendController::class, 'shoping_cart'])->name('shopingcart.post');
+
+Route::post('/applycoupon', [FrontendController::class, 'applycoupon'])->name('applycoupon');
+Route::get('/cart', [FrontendController::class, 'cartlist']);
+Route::get('/cartprodelete/{id}', [FrontendController::class, 'cartdelete']);
+Route::post('/cartupdate', [FrontendController::class, 'cartupdate'])->name('cartupdate');
+Route::match(["post",'get'],'/confirmorder', [FrontendController::class, 'confirmorder'])->name('confirmorder');
+
+Route::match(["post",'get'],'/confirmorderr', [FrontendController::class, 'confirmorderr'])->name('confirmorderr');
+
+
+Route::get('Checkout', [FrontendController::class, 'checkout'])->name('Checkout');
+Route::get('Product/{type?}', [FrontendController::class, 'products'])->name('products');
+Route::get('Team', [FrontendController::class, 'teams'])->name('teams');
+Route::get('Product/{id}', [FrontendController::class, 'allproductshow'])->name('produ');
+Route::get('/header', [FrontendController::class, 'viewcategroy_list'])->name('header');
+
+Route::get('allproducts', [FrontendController::class, 'showproduct'])->name('allproducts');
+
+//Route::get('product-details/{id}', [FrontendController::class, 'product_details']);
+Route::get('digital-business-card-in-jaipur/{id}', [FrontendController::class, 'product_details']);
+Route::POST('savecontact',[FrontendController::class,'contectus']);
+Route::POST('savecorporate',[FrontendController::class,'corporates']);
+Route::get('/', [FrontendController::class, 'testimonialview'])->name('home');
+Route::get('/About-Us', [FrontendController::class, 'ABoutview'])->name('about');
+
+
+Route::POST('/',[FrontendController::class,'subscribe'])->name('subscribe');
+
+
+Route::get('subscribers_view',[SubscriberController::class,'subscribers_view'])->name('subscribers_view');
+
+Route::POST('add_subscribers',[SubscriberController::class,'add_subscribers'])->name('add_subscribers');
+
+/************************************************************************************************************** */
+ 
+ 
+Route::prefix('admin')->name('admin.')->group(function(){
+
+Route::middleware(['guest:admin','PreventBackHistory'])->group(function(){
+    Route::view('/login','admin-new.login')->name('login');
+    Route::post('/check',[AdminController::class,'check'])->name('check');
+    Route::post('/GoogelMaster',[AdminController::class,'admin.Authenticator']);
+});
+
+
+//    Route::view('GoogelMaster','GoogelMaster');
+
+//    Route::POST('GoogelMaster',[AdminController::class,'GoogelMaster']);
+
+
+
+Route::middleware(['auth:admin','PreventBackHistory'])->group(function(){
+Route::view('/index','admin-new.index')->name('index');
+Route::get('/logout',[AdminController::class,'logout'])->name('logout');
+
+
+
+Route::view('/websetting','admin/websetting')->name('websetting');
+Route::POST('admin/websetting',[AdminController::class,'websetting']);
+Route::get('viewwebsetting',[AdminController::class,'viewwebsetting']);
+Route::get('update{id}',[AdminController::class,'updatedata']);
+Route::POST('admin/updatewebsetting',[AdminController::class,'updatewebsetting']);
+
+
+Route::view('/add-category','admin-new.category.add')->name('add-category');
+Route::POST('/addcategroy',[AdminController::class,'addcategroy']);
+Route::get('/viewcategroy',[AdminController::class,'viewcategroy']);
+Route::get('catupdate{id}',[AdminController::class,'updatecatagroydata']);
+Route::POST('admin/updatecategroy',[AdminController::class,'updatecategroy']);
+Route::get('/categories.update.status', [AdminController::class,'updateStatus']);
+
+
+Route::get('delete{id}',[AdminController::class,'deletecategroy']);
+
+
+
+
+Route::get('/addtestimonial',[AdminController::class,'addtestimonial']);
+Route::POST('/savetestimonial',[AdminController::class,'savetestimonial']);
+Route::get('/testimonial',[AdminController::class,'testimoniallist']);
+Route::get('edittestimonial{id}',[AdminController::class,'edittestimonial']);
+Route::POST('updatetestimonial',[AdminController::class,'updatetestimonial']);
+Route::get('testimonialdelete{id}',[AdminController::class,'testimonialdelete']);
+
+
+
+
+
+
+
+
+
+
+Route::get('/view_price_plan',[AdminController::class,'view_price_plan']);
+Route::get('editprice{id}',[AdminController::class,'editprice']);
+Route::POST('updatetesprice',[AdminController::class,'updatetesprice']);
+Route::get('pricedelete{id}',[AdminController::class,'pricedelete']);
+
+/************************************************************************************************************** */
+
+
+Route::view('/add-subcategory','admin/add-subcategory')->name('add-subcategory');
+Route::POST('/add-subcategroy',[AdminController::class,'add_subcategroy']);
+Route::get('/view-subcategory',[Admincontroller::class,'view_subcategroy']);
+Route::get('/add-subcategory',[AdminController::class,'selectcategory']);
+
+Route::get('subcatupdate{id}',[AdminController::class,'update_subcatagroydata']);
+Route::POST('admin/update_subcatagroydata',[AdminController::class,'update_subcategroy']);
+
+Route::get('subcatdelete{id}',[AdminController::class,'deletesubcategroy']);
+
+
+Route::get('/subcategories.update.status', [AdminController::class,'updatecatStatus']);
+
+Route::get('/orders', [AdminController::class,'orders']);
+Route::get('/orderview{id}', [AdminController::class,'orderview']);
+Route::get('order-delete/{id}', [AdminController::class,'order_delete']);
+
+
+/*anand start code */
+
+Route::get('/manageagent', [AdminController::class,'manageagent']);
+
+Route::get('/preorder', [AdminController::class,'preorder']);
+ 
+Route::get('/addagent', [AdminController::class,'addagent']);
+
+Route::post('addagent/addagentstore',[AdminController::class, 'addagentstore'])->name('addagent.addagentstore');
+
+Route::get('/agentdelete/{id}',[AdminController::class,'agentdelete']);
+
+Route::get('editagent/{id}/editagent',[AdminController::class, 'editagent']);
+Route::put('editagent/{id}/agentupdate',[AdminController::class, 'agentupdate']);
+
+Route::get('viewagent/{id}/viewagent',[AdminController::class, 'viewagent']);
+
+Route::post('manageagent/storenotification',[AdminController::class, 'storenotification'])->name('manageuser.storenotification');
+
+Route::get('/deletenotification/{id}/delete',[AdminController::class, 'destroynotification']);
+
+Route::get('editnotification/{id}/edit/{agent_id}',[AdminController::class, 'editnotification']);
+
+Route::put('editnotification/{id}/update',[AdminController::class, 'updatenotification']);
+
+Route::get('/agent.update.status', [AdminController::class,'updateagentStatus']);
+  
+
+// for user block and unbolck permission from usrpanel and profile 
+Route::get('/user.update.permission', [AdminController::class,'updateuserPermission']);
+// 
+// for user gold and normal userpanel
+Route::get('/user.update.panel_status', [AdminController::class,'updatePanel_status']);
+//  
+ 
+/*anand end code */
+
+
+Route::get('user-list',[AdminController::class,'user_list']);
+Route::get('user-delete/{id}',[AdminController::class,'user_delete']);
+
+
+
+/************************************************************************************************************** */
+
+
+
+Route::view('/add-childcategory','admin/add-childcategory');
+
+Route::get('/add-childcategory',[ChildcategoryController::class,'categoryslist']);
+Route::post('/getSubcat', [ChildcategoryController::class,'getSubcat']);
+Route::POST('/add-childcategory', [ChildcategoryController::class,'add_childcategory']);
+Route::view('/view-Childcategory','admin/view-Childcategory');
+Route::get('/view-Childcategory',[ChildcategoryController::class,'show']);
+Route::get('childcatupdate{id}',[ChildcategoryController::class,'select']);
+Route::POST('admin/update-childcategroy',[ChildcategoryController::class,'edit']);
+Route::get('/childcategories.update.status', [ChildcategoryController::class,'updatecatStatus']);
+Route::get('childcatdelete{id}',[ChildcategoryController::class,'deletechildcategroy']);
+
+/************************************************************************************************************** */
+
+
+
+Route::view('/add-product','admin/add-product');
+Route::get('/add-product',[ProductController::class,'categoryslist']);
+
+Route::post('/getsubcat', [ProductController::class,'getsubcat']);
+Route::post('/add-product', [ProductController::class,'add_product']);
+
+Route::view('/view-product','admin/view-product');
+Route::get('/view-product',[ProductController::class,'proselect']);
+Route::get('/product.update.status', [ProductController::class,'updateStatus']);
+Route::get('/prodelete{id}',[ProductController::class,'deleteproduct']);
+Route::get('/proview{id}',[ProductController::class,'singalproduct']);
+Route::get('/proupdate{id}',[ProductController::class,'updateselectproduct']);
+Route::POST('admin/update-product',[ProductController::class,'edit']);
+
+Route::view('/add-logo','admin-new.brand.add');
+Route::get('/view-brand_logo',[ProductController::class,'view_brand_logo_view']);
+Route::get('/brand_logo.update.status', [ProductController::class,'brand_logo_status']);
+Route::get('/brand_logo_delete{id}',[ProductController::class,'brand_logo_delete']);
+Route::post('/add-logo1', [ProductController::class,'add_logo']);
+Route::get('/brand_logo_update{id}',[ProductController::class,'brand_logo_update']);
+Route::POST('admin/update-view-brand_logo',[ProductController::class,'brand_logo_edit']);
+
+Route::get('/view-faq',[ProductController::class,'view_faq']);
+Route::get('/add-faq',[ProductController::class,'add_faq']);
+Route::post('/faq-data',[ProductController::class,'faq_data']);
+Route::get('/delete-faq/{id}',[ProductController::class,'faq_delete']);
+Route::get('/edit-faq/{id}',[ProductController::class,'edit_faq']);
+Route::post('/faq-update/{id}',[ProductController::class,'faq_update']);
+/****************************************************View Admin********************************************************** */
+
+
+
+
+Route::get('addcart', [FrontendController::class, 'addToCart'])->name('addcart');
+Route::patch('update-cart', [FrontendController::class, 'update'])->name('update.cart');
+Route::delete('remove-from-cart', [FrontendController::class, 'remove'])->name('remove.from.cart');
+
+
+
+Route::get('contactus', [AdminController::class,'viewcontact']);
+Route::get('corporate', [AdminController::class,'view_corporate']);
+Route::get('subscribe_channel', [AdminController::class, 'subscribeview']);
+Route::get('Pricing_Plans', [AdminController::class, 'Pricing_Plans']);
+Route::get('subdelete{id}', [AdminController::class, 'subdelete']);
+
+
+
+Route::view('/add_offer','admin-new.offer.add');
+Route::POST('/add_offer',[AdminController::class,'add_offer']);
+Route::get('/view_offer', [AdminController::class,'viewoffer']);
+Route::get('/offerdelete{id}',[AdminController::class,'offerdelete']);
+Route::get('/offer.status', [AdminController::class,'offerStatus']);
+Route::get('/offerupdate{id}',[AdminController::class,'offerdata']);
+Route::POST('admin/update_offer',[AdminController::class,'update_offer']);
+
+
+Route::view('/coupon','admin-new.coupon.add');
+Route::POST('/add_coupon',[AdminController::class,'add_coupon']);
+Route::get('/view_coupon', [AdminController::class,'view_coupon']);
+Route::get('/delete_coupon/{id}',[AdminController::class,'delete_coupon']);
+Route::get('/coupon.status', [AdminController::class,'couponStatus']);
+Route::get('/edit_coupon{id}',[AdminController::class,'edit_coupon']);
+Route::POST('update_coupon',[AdminController::class,'update_coupon']);
+
+
+Route::POST('add_Pricing_Plans',[AdminController::class,'add_Pricing_Plans']);
+
+
+// =============================================
+// COMPANY MANAGEMENT ROUTES
+// =============================================
+Route::get('/companies', [AdminController::class, 'adminCompanies']);
+Route::get('/companies/export', [AdminController::class, 'adminExportCompanies'])->name('admin.companies.export');
+Route::get('/companies/{id}', [AdminController::class, 'adminViewCompany']);
+Route::get('/companies/{id}/edit', [AdminController::class, 'adminEditCompany']);
+Route::post('/companies/{id}/update', [AdminController::class, 'adminUpdateCompany']);
+Route::post('/companies/{id}/toggle-status', [AdminController::class, 'adminToggleCompanyStatus']);
+Route::post('/companies/{id}/update-limit', [AdminController::class, 'adminUpdateCompanyLimit']);
+Route::get('/companies/{id}/delete', [AdminController::class, 'adminDeleteCompany']);
+Route::get('/companies/{id}/staff', [AdminController::class, 'adminCompanyStaff']);
+Route::get('/companies/{id}/subscription', [AdminController::class, 'adminCompanySubscription']);
+
+// =============================================
+// PROFESSION THEMES ROUTES
+// =============================================
+Route::get('/profession-themes', [AdminController::class, 'adminProfessionThemes']);
+Route::post('/profession-themes/{id}/toggle', [AdminController::class, 'adminToggleTheme']);
+
+// =============================================
+// ANALYTICS DASHBOARD
+// =============================================
+Route::get('/analytics', [AdminController::class, 'adminAnalytics'])->name('admin.analytics');
+
+
+//------------------------------------------- tracking orders start--------------------------------------//
+
+
+
+Route::get('/', function () {
+    return Orders::all();
+});
+Route::post('order',[TrackorderController::class,'getOrder']);
+
+//------------------------------------------- tracking orders end--------------------------------------//
+
+
+
+
+
+});
+
+
+});
+
+
+/*anand start code */
+
+// For Agent Panel
+// Route::get('/admin',[DashboardController::class,'index']);
+
+// agent admin
+Route::redirect('/franchise/login', '/agent/login');
+
+Route::prefix('agent')->group(function(){
+    Route::get('/login',[App\Http\Controllers\Agent\LoginController::class, 'index']);
+    Route::post('login/auth',[App\Http\Controllers\Agent\LoginController::class, 'auth'])->name('login.auth');
+
+    Route::get('logout',[App\Http\Controllers\Agent\LoginController::class, 'logout']);
+
+});
+//
+Route::prefix('agent')->group(function(){
+
+    Route::get('/register',[App\Http\Controllers\Agent\RegisterController::class, 'index']);
+});
+///
+
+Route::group(['middleware'=>'agent_auth'], function(){
+
+
+Route::prefix('agent')->group(function(){
+
+    Route::get('/dashboard',[App\Http\Controllers\Agent\DashboardController::class, 'index']);
+});
+
+Route::prefix('agent')->group(function(){
+
+    Route::get('/homebanner',[App\Http\Controllers\Agent\HomebannerController::class, 'index']);
+});
+
+Route::prefix('agent')->group(function(){
+
+    Route::get('/homeabout',[App\Http\Controllers\Agent\HomeaboutController::class, 'index']);
+
+    Route::get('edithomeabout/{id}/edit',[App\Http\Controllers\Agent\HomeaboutController::class, 'edit']);
+    Route::put('edithomeabout/{id}/update',[App\Http\Controllers\Agent\HomeaboutController::class, 'update']);
+
+
+});
+Route::prefix('agent')->group(function(){
+
+    Route::get('/homewhy',[App\Http\Controllers\Agent\HomewhyController::class, 'index']);
+
+    Route::get('edithomewhy/{id}/edit',[App\Http\Controllers\Agent\HomewhyController::class, 'edit']);
+    Route::put('edithomewhy/{id}/update',[App\Http\Controllers\Agent\HomewhyController::class, 'update']);
+});
+
+Route::prefix('agent')->group(function(){
+
+    Route::get('/articles',[App\Http\Controllers\Agent\ArticlesController::class, 'index']);
+
+    Route::get('/addarticle',[App\Http\Controllers\Agent\ArticlesController::class, 'addarticle']);
+    Route::post('addarticle/store',[App\Http\Controllers\Agent\ArticlesController::class, 'store'])->name('addarticle.store');
+
+    Route::get('/article/{id}/delete',[App\Http\Controllers\Agent\ArticlesController::class, 'destroy']);
+
+    Route::get('editarticle/{id}/edit',[App\Http\Controllers\Agent\ArticlesController::class, 'editarticle']);
+    Route::put('editarticle/{id}/update',[App\Http\Controllers\Agent\ArticlesController::class, 'update']);
+
+});
+Route::prefix('agent')->group(function(){
+
+    Route::get('/faq',[App\Http\Controllers\Agent\FaqController::class, 'index']);
+
+    Route::get('/addfaq',[App\Http\Controllers\Agent\FaqController::class, 'addfaq']);
+    Route::post('addfaq/store',[App\Http\Controllers\Agent\FaqController::class, 'store'])->name('addfaq.store');
+
+    Route::get('/faq/{id}/delete',[App\Http\Controllers\Agent\FaqController::class, 'destroy']);
+
+    Route::get('editfaq/{id}/edit',[App\Http\Controllers\Agent\FaqController::class, 'editfaq']);
+    Route::put('editfaq/{id}/update',[App\Http\Controllers\Agent\FaqController::class, 'update']);
+
+});
+Route::prefix('agent')->group(function(){
+
+    Route::get('/contact',[App\Http\Controllers\Agent\ContactController::class, 'index']);
+
+    // Route::get('contact{id}/view',[App\Http\Controllers\Agent\ContactController::class, 'view']);
+
+});
+
+Route::prefix('agent')->group(function(){
+
+    Route::get('contact/{id}/contactview',[App\Http\Controllers\Agent\ContactController::class, 'contactview']);
+});
+
+Route::prefix('agent')->group(function(){
+
+    Route::get('/allcategory',[App\Http\Controllers\Agent\AllcategoryController::class, 'index']);
+
+    Route::post('addcategory/store',[App\Http\Controllers\Agent\AllcategoryController::class, 'store'])->name('addcategory.store');
+
+    Route::get('/allcategory/{id}/delete',[App\Http\Controllers\Agent\AllcategoryController::class, 'destroy']);
+
+    Route::get('editcategory/{id}/edit',[App\Http\Controllers\Agent\AllcategoryController::class, 'editcategory']);
+
+    Route::put('editcategory/{id}/update',[App\Http\Controllers\Agent\AllcategoryController::class, 'update']);
+
+});
+Route::prefix('agent')->group(function(){
+
+    Route::get('/addnewcategory',[App\Http\Controllers\Agent\AddnewcategoryController::class, 'index']);
+});
+
+Route::prefix('agent')->group(function(){
+
+    Route::get('/allsubcategory',[App\Http\Controllers\Agent\AllsubcategoryController::class, 'index']);
+
+    Route::post('/addsubcategory/store',[App\Http\Controllers\Agent\AllsubcategoryController::class, 'store'])->name('addsubcategory.store');
+
+    Route::get('/allsubcategory/{id}/delete',[App\Http\Controllers\Agent\AllsubcategoryController::class, 'destroy']);
+
+    Route::get('editsubcategory/{id}/edit',[App\Http\Controllers\Agent\AllsubcategoryController::class, 'editsubcategory']);
+
+    Route::put('editsubcategory/{id}/update',[App\Http\Controllers\Agent\AllsubcategoryController::class, 'update']);
+
+});
+
+Route::prefix('agent')->group(function(){
+
+    Route::get('/addnewsubcategory',[App\Http\Controllers\Agent\AddnewsubcategoryController::class, 'index']);
+});
+
+Route::prefix('agent')->group(function(){
+
+    Route::get('/allservices',[App\Http\Controllers\Agent\AllservicesController::class, 'index']);
+
+    Route::post('addnewservice/store',[App\Http\Controllers\Agent\AllservicesController::class, 'store'])->name('addnewservice.store');
+
+    Route::get('/allservices/{id}/delete',[App\Http\Controllers\Agent\AllservicesController::class, 'destroy']);
+
+    Route::get('editservice/{id}/edit',[App\Http\Controllers\Agent\AllservicesController::class, 'editservice']);
+    Route::put('ediservice/{id}/update',[App\Http\Controllers\Agent\AllservicesController::class, 'update']);
+
+});
+
+Route::prefix('agent')->group(function(){
+
+    Route::get('/addnewservice',[App\Http\Controllers\Agent\AddnewserviceController::class, 'index']);
+
+    // for show subcategory in add new service page when click category
+    Route::post('/getSubcat',[App\Http\Controllers\Agent\AddnewserviceController::class, 'getSubcat']);
+    //
+});
+
+Route::prefix('agent')->group(function(){
+
+    Route::get('/allusers',[App\Http\Controllers\Agent\AllusersController::class, 'index']);
+
+    Route::post('addnewuser/store',[App\Http\Controllers\Agent\AllusersController::class, 'store'])->name('addnewuser.store');
+
+    Route::get('edituser/{id}/edit',[App\Http\Controllers\Agent\AllusersController::class, 'edituser']);
+
+    Route::put('edituser/{id}/update',[App\Http\Controllers\Agent\AllusersController::class, 'update']);
+
+    Route::get('viewuser/{id}/view',[App\Http\Controllers\Agent\AllusersController::class, 'viewuser']);
+
+    //
+    Route::get('manageuser/{id}/manage',[App\Http\Controllers\Agent\AllusersController::class, 'manageuser']);
+
+    Route::post('manageuser/storenotification',[App\Http\Controllers\Agent\AllusersController::class, 'storenotification'])->name('manageuser.storenotification');
+
+    Route::get('/deletenotification/{id}/delete',[App\Http\Controllers\Agent\AllusersController::class, 'destroynotification']);
+
+    Route::get('editnotification/{id}/edit/{user_id}',[App\Http\Controllers\Agent\AllusersController::class, 'editnotification']);
+
+    Route::put('editnotification/{id}/update',[App\Http\Controllers\Agent\AllusersController::class, 'updatenotification']);
+
+    Route::put('workprgress/{id}/update',[App\Http\Controllers\Agent\AllusersController::class, 'workprgress']);
+
+    Route::put('validity_date/{id}/update',[App\Http\Controllers\Agent\AllusersController::class, 'validity_date']);
+
+    // Route::post('/clear_dues',[App\Http\Controllers\Agent\AllusersController::class, 'clear_dues']);
+
+    // upload bulk users
+    Route::post('/users/bulk-upload', [App\Http\Controllers\Agent\AllusersController::class, 'bulkUpload'])->name('users.bulk-upload');
+
+    //
+});
+Route::prefix('agent')->group(function(){
+
+    Route::get('/addnewuser',[App\Http\Controllers\Agent\AddnewuserController::class, 'index']);
+});
+
+Route::prefix('agent')->group(function(){
+
+    Route::get('/usertickets',[App\Http\Controllers\Agent\UserticketsController::class, 'index']);
+});
+Route::prefix('agent')->group(function(){
+
+    Route::get('/managertickets',[App\Http\Controllers\Agent\ManagerticketsController::class, 'index']);
+});
+
+Route::prefix('agent')->group(function(){
+
+    Route::get('/allorders',[App\Http\Controllers\Agent\AllordersController::class, 'index']);
+
+    Route::get('vieworder/{id}/view',[App\Http\Controllers\Agent\AllordersController::class, 'vieworder']);
+
+
+});
+
+
+Route::prefix('agent')->group(function(){
+
+    Route::get('/myprofile',[App\Http\Controllers\Agent\MyprofileController::class, 'index']);
+
+});
+
+Route::prefix('agent')->group(function(){
+
+    Route::get('/support',[App\Http\Controllers\Agent\SupportController::class, 'index']);
+
+});
+
+});
+
+/*anand end code */
+
+
+Route::get('/cache', function () {
+Artisan::call('cache:clear');
+});
+
+
+Route::get('/storage', function () {
+Artisan::call('storage:link');
+});
+
+
+
+Route::get('/optimize', function () {
+Artisan::call('optimize:clear');
+});
+
+Route::get('user/document/download/{id}',[FrontendController::class,'document_download']);
+
+Route::get('auth/google',[FrontendController::class,'redirect'])->name('google-auth');
+Route::get('auth/google/call-back',[FrontendController::class,'callbackGoogle']);
+
+// New Redesign Test Route
+Route::view('/redesign-test', 'frontend.index-new-test');
+
+// =====================================================
+// COMPANY PANEL ROUTES
+// =====================================================
+
+// Company Public Routes (No Auth Required)
+Route::prefix('company')->group(function () {
+    Route::get('/login', [App\Http\Controllers\Company\AuthController::class, 'showLogin']);
+    Route::post('/login', [App\Http\Controllers\Company\AuthController::class, 'login'])->name('company.login');
+    Route::get('/register', [App\Http\Controllers\Company\AuthController::class, 'showRegister']);
+    Route::post('/register', [App\Http\Controllers\Company\AuthController::class, 'register'])->name('company.register');
+    Route::get('/logout', [App\Http\Controllers\Company\AuthController::class, 'logout']);
+});
+
+// Company Protected Routes (Auth Required)
+Route::group(['middleware' => 'company_auth'], function () {
+    Route::prefix('company')->group(function () {
+        // Dashboard
+        Route::get('/dashboard', [App\Http\Controllers\Company\DashboardController::class, 'index']);
+
+        // Staff Management
+        Route::get('/staff', [App\Http\Controllers\Company\StaffController::class, 'index']);
+        Route::get('/staff/create', [App\Http\Controllers\Company\StaffController::class, 'create']);
+        Route::post('/staff/store', [App\Http\Controllers\Company\StaffController::class, 'store'])->name('company.staff.store');
+        Route::get('/staff/import', [App\Http\Controllers\Company\StaffController::class, 'import']);
+        Route::post('/staff/import', [App\Http\Controllers\Company\StaffController::class, 'import'])->name('company.staff.import');
+        Route::get('/staff/{id}', [App\Http\Controllers\Company\StaffController::class, 'show']);
+        Route::get('/staff/{id}/edit', [App\Http\Controllers\Company\StaffController::class, 'edit']);
+        Route::put('/staff/{id}/update', [App\Http\Controllers\Company\StaffController::class, 'update'])->name('company.staff.update');
+        Route::delete('/staff/{id}/delete', [App\Http\Controllers\Company\StaffController::class, 'destroy'])->name('company.staff.delete');
+        Route::post('/staff/{id}/toggle-card', [App\Http\Controllers\Company\StaffController::class, 'toggleCard'])->name('company.staff.toggle');
+        Route::get('/staff/{id}/visibility', [App\Http\Controllers\Company\StaffController::class, 'visibility']);
+        Route::post('/staff/{id}/visibility', [App\Http\Controllers\Company\StaffController::class, 'updateVisibility'])->name('company.staff.visibility');
+
+        // Company Profile
+        Route::get('/profile', [App\Http\Controllers\Company\ProfileController::class, 'index']);
+        Route::post('/profile/update', [App\Http\Controllers\Company\ProfileController::class, 'update'])->name('company.profile.update');
+        Route::post('/profile/social', [App\Http\Controllers\Company\ProfileController::class, 'updateSocial'])->name('company.profile.social');
+
+        // Branding
+        Route::get('/branding', [App\Http\Controllers\Company\ProfileController::class, 'branding']);
+        Route::post('/branding/colors', [App\Http\Controllers\Company\ProfileController::class, 'updateColors'])->name('company.branding.colors');
+        Route::post('/branding/typography', [App\Http\Controllers\Company\ProfileController::class, 'updateTypography'])->name('company.branding.typography');
+        Route::post('/branding/layout', [App\Http\Controllers\Company\ProfileController::class, 'updateLayout'])->name('company.branding.layout');
+
+        // Subscription
+        Route::get('/subscription', [App\Http\Controllers\Company\ProfileController::class, 'subscription']);
+
+        // Password
+        Route::get('/change-password', [App\Http\Controllers\Company\ProfileController::class, 'changePassword']);
+        Route::post('/change-password', [App\Http\Controllers\Company\ProfileController::class, 'updatePassword'])->name('company.password.update');
+
+        // Menu Management (Restaurant Theme)
+        Route::get('/menu', [App\Http\Controllers\Company\MenuController::class, 'index']);
+
+        // Menu Categories
+        Route::get('/menu/category/create', [App\Http\Controllers\Company\MenuController::class, 'createCategory']);
+        Route::post('/menu/category/store', [App\Http\Controllers\Company\MenuController::class, 'storeCategory'])->name('company.menu.category.store');
+        Route::get('/menu/category/{id}/edit', [App\Http\Controllers\Company\MenuController::class, 'editCategory']);
+        Route::put('/menu/category/{id}/update', [App\Http\Controllers\Company\MenuController::class, 'updateCategory'])->name('company.menu.category.update');
+        Route::delete('/menu/category/{id}/delete', [App\Http\Controllers\Company\MenuController::class, 'destroyCategory'])->name('company.menu.category.delete');
+        Route::post('/menu/category/{id}/toggle', [App\Http\Controllers\Company\MenuController::class, 'toggleCategory'])->name('company.menu.category.toggle');
+        Route::post('/menu/category/reorder', [App\Http\Controllers\Company\MenuController::class, 'reorderCategories'])->name('company.menu.category.reorder');
+        Route::get('/menu/category/{id}/items', [App\Http\Controllers\Company\MenuController::class, 'categoryItems']);
+
+        // Menu Items
+        Route::get('/menu/item/create', [App\Http\Controllers\Company\MenuController::class, 'createItem']);
+        Route::post('/menu/item/store', [App\Http\Controllers\Company\MenuController::class, 'storeItem'])->name('company.menu.item.store');
+        Route::get('/menu/item/{id}/edit', [App\Http\Controllers\Company\MenuController::class, 'editItem']);
+        Route::put('/menu/item/{id}/update', [App\Http\Controllers\Company\MenuController::class, 'updateItem'])->name('company.menu.item.update');
+        Route::delete('/menu/item/{id}/delete', [App\Http\Controllers\Company\MenuController::class, 'destroyItem'])->name('company.menu.item.delete');
+        Route::post('/menu/item/{id}/toggle', [App\Http\Controllers\Company\MenuController::class, 'toggleItem'])->name('company.menu.item.toggle');
+        Route::post('/menu/item/{id}/bestseller', [App\Http\Controllers\Company\MenuController::class, 'toggleBestseller'])->name('company.menu.item.bestseller');
+        Route::post('/menu/category/{id}/items/reorder', [App\Http\Controllers\Company\MenuController::class, 'reorderItems'])->name('company.menu.items.reorder');
+
+        // Restaurant Settings
+        Route::get('/restaurant', [App\Http\Controllers\Company\RestaurantController::class, 'index']);
+        Route::post('/restaurant/basic', [App\Http\Controllers\Company\RestaurantController::class, 'updateBasic'])->name('company.restaurant.basic');
+        Route::post('/restaurant/hours', [App\Http\Controllers\Company\RestaurantController::class, 'updateHours'])->name('company.restaurant.hours');
+        Route::post('/restaurant/services', [App\Http\Controllers\Company\RestaurantController::class, 'updateServices'])->name('company.restaurant.services');
+        Route::post('/restaurant/payments', [App\Http\Controllers\Company\RestaurantController::class, 'updatePayments'])->name('company.restaurant.payments');
+    });
+});
+
+// ============================================
+// E-COMMERCE STORE ROUTES (Phase 4)
+// ============================================
+
+// Frontend Store Routes (Public)
+Route::prefix('Product')->name('store.')->group(function () {
+    Route::get('/', [App\Http\Controllers\Frontend\StoreController::class, 'index'])->name('index');
+    Route::get('/search', [App\Http\Controllers\Frontend\StoreController::class, 'search'])->name('search');
+    Route::get('/category/{slug}', [App\Http\Controllers\Frontend\StoreController::class, 'category'])->name('category');
+    Route::get('/seller/{id}', [App\Http\Controllers\Frontend\StoreController::class, 'seller'])->name('seller');
+    Route::get('/{slug}', [App\Http\Controllers\Frontend\StoreController::class, 'show'])->name('show');
+});
+
+// Admin E-Commerce Routes
+Route::middleware(['auth:admin'])->prefix('admin-new')->name('admin.')->group(function () {
+    // Product Management
+    Route::resource('products', App\Http\Controllers\Admin\ProductAdminController::class);
+    Route::get('products-pending', [App\Http\Controllers\Admin\ProductAdminController::class, 'pending'])->name('products.pending');
+    Route::post('products/{id}/approve', [App\Http\Controllers\Admin\ProductAdminController::class, 'approve'])->name('products.approve');
+    Route::post('products/{id}/reject', [App\Http\Controllers\Admin\ProductAdminController::class, 'reject'])->name('products.reject');
+    Route::post('products/{id}/toggle-featured', [App\Http\Controllers\Admin\ProductAdminController::class, 'toggleFeatured'])->name('products.toggle-featured');
+
+    // Category Management
+    Route::resource('categories', App\Http\Controllers\Admin\CategoryAdminController::class);
+});
+
+// User Store Routes
+Route::middleware(['auth:customer'])->prefix('user')->name('user.')->group(function () {
+    Route::resource('products', App\Http\Controllers\User\UserProductController::class);
+});
+
+// ============================================
+// MEDICAL FEATURES ROUTES (Phase 5)
+// ============================================
+
+// Medical Frontend Routes (Public)
+Route::prefix('{slug}/medical')->name('medical.')->group(function () {
+    // Profile selector and viewing
+    Route::get('/', [App\Http\Controllers\MedicalController::class, 'showProfileSelector'])->name('selector');
+    Route::get('/{profileType}', [App\Http\Controllers\MedicalController::class, 'showProfile'])->name('profile.show')->where('profileType', 'doctor|hospital|daycare');
+
+    // Appointment booking (public)
+    Route::get('/book-appointment', [App\Http\Controllers\MedicalController::class, 'showAppointmentForm'])->name('appointment.form');
+    Route::post('/book-appointment', [App\Http\Controllers\MedicalController::class, 'storeAppointment'])->name('appointment.store');
+
+    // Payment (public)
+    Route::get('/payment/{appointmentId?}', [App\Http\Controllers\MedicalController::class, 'showPaymentForm'])->name('payment.form');
+    Route::post('/payment/process', [App\Http\Controllers\MedicalController::class, 'processPayment'])->name('payment.process');
+
+    // Reviews (public)
+    Route::get('/reviews', [App\Http\Controllers\MedicalController::class, 'showReviews'])->name('reviews');
+    Route::post('/review/submit', [App\Http\Controllers\MedicalController::class, 'storeReview'])->name('review.store');
+});
+
+// Medical User Dashboard Routes (Authenticated)
+Route::middleware(['auth:customer'])->prefix('user/medical')->name('user.medical.')->group(function () {
+    // Profile Management
+    Route::get('/profiles', [App\Http\Controllers\MedicalController::class, 'profileSettings'])->name('profiles');
+    Route::post('/profile/save', [App\Http\Controllers\MedicalController::class, 'saveProfile'])->name('profile.save');
+    Route::delete('/profile/{id}', [App\Http\Controllers\MedicalController::class, 'deleteProfile'])->name('profile.delete');
+
+    // Appointments Management
+    Route::get('/appointments', [App\Http\Controllers\MedicalController::class, 'appointments'])->name('appointments');
+    Route::post('/appointment/{id}/status', [App\Http\Controllers\MedicalController::class, 'updateAppointmentStatus'])->name('appointment.updateStatus');
+
+    // Payments Management
+    Route::get('/payments', [App\Http\Controllers\MedicalController::class, 'payments'])->name('payments');
+    Route::get('/payment/{id}/receipt', [App\Http\Controllers\MedicalController::class, 'downloadReceipt'])->name('receipt.download');
+    Route::get('/payment-settings', [App\Http\Controllers\MedicalController::class, 'paymentSettings'])->name('payment.settings');
+    Route::post('/payment-settings/save', [App\Http\Controllers\MedicalController::class, 'savePaymentSettings'])->name('payment.settings.save');
+
+    // Reviews Management
+    Route::get('/reviews', [App\Http\Controllers\MedicalController::class, 'reviews'])->name('reviews');
+    Route::post('/review/{id}/approve', [App\Http\Controllers\MedicalController::class, 'approveReview'])->name('review.approve');
+    Route::post('/review/{id}/reject', [App\Http\Controllers\MedicalController::class, 'rejectReview'])->name('review.reject');
+    Route::post('/review/{id}/toggle-featured', [App\Http\Controllers\MedicalController::class, 'toggleFeaturedReview'])->name('review.toggleFeatured');
+    Route::delete('/review/{id}', [App\Http\Controllers\MedicalController::class, 'deleteReview'])->name('review.delete');
+});
+
+// Catch-all route for slug-based profile URLs (MUST BE LAST)
+// This allows URLs like domain.com/john-doe to display user profiles
+Route::get('/{slug}', [FrontendController::class, 'profileBySlug'])->where('slug', '[a-z0-9\-]+');

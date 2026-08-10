@@ -1,0 +1,53 @@
+<svg width="320" height="200" viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="productGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ec4899;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#db2777;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#be185d;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accentProd" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#7c3aed;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#a855f7;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <rect x="5" y="8" width="310" height="190" rx="15" fill="#000000" opacity="0.1"/>
+  <rect x="0" y="0" width="310" height="190" rx="15" fill="url(#productGrad)" stroke="#be185d" stroke-width="2"/>
+
+  <rect x="0" y="0" width="310" height="8" rx="15" fill="url(#accentProd)"/>
+  <rect x="0" y="182" width="310" height="8" rx="15" fill="url(#accentProd)" opacity="0.5"/>
+
+  <!-- NFC Chip -->
+  <rect x="25" y="30" width="45" height="35" rx="4" fill="#fbbf24" stroke="#f97316" stroke-width="1.5"/>
+  <line x1="30" y1="35" x2="30" y2="60" stroke="#000000" stroke-width="1" opacity="0.3"/>
+  <line x1="38" y1="35" x2="38" y2="60" stroke="#000000" stroke-width="1" opacity="0.3"/>
+  <line x1="46" y1="35" x2="46" y2="60" stroke="#000000" stroke-width="1" opacity="0.3"/>
+  <line x1="54" y1="35" x2="54" y2="60" stroke="#000000" stroke-width="1" opacity="0.3"/>
+  <line x1="62" y1="35" x2="62" y2="60" stroke="#000000" stroke-width="1" opacity="0.3"/>
+
+  <!-- Shopping/Product Icon -->
+  <g transform="translate(205, 40)">
+    <!-- Shopping bag -->
+    <path d="M 10 15 L 5 60 L 55 60 L 50 15 Z" fill="#ffffff" opacity="0.9" stroke="#ffffff" stroke-width="2"/>
+    <path d="M 20 15 Q 20 5 30 5 Q 40 5 40 15" stroke="#ffffff" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <!-- Tag -->
+    <circle cx="50" cy="25" r="8" fill="#fbbf24"/>
+    <text x="50" y="29" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#ec4899" text-anchor="middle">%</text>
+  </g>
+
+  <text x="25" y="110" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#ffffff">TRENDZ PRODUCTS</text>
+  <text x="25" y="132" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" opacity="0.9">Premium Product Retailer</text>
+  <text x="25" y="150" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" opacity="0.8">Shop • Discover • Experience</text>
+
+  <line x1="25" y1="165" x2="180" y2="165" stroke="#ffffff" stroke-width="1.5" opacity="0.6"/>
+  <line x1="25" y1="173" x2="160" y2="173" stroke="#ffffff" stroke-width="1.5" opacity="0.6"/>
+
+  <g transform="translate(270, 155)">
+    <path d="M 0 0 Q 12 0 12 12" stroke="#ffffff" stroke-width="2" fill="none" opacity="0.8"/>
+    <path d="M 0 6 Q 7 6 7 13" stroke="#ffffff" stroke-width="2" fill="none" opacity="0.8"/>
+    <circle cx="0" cy="15" r="2" fill="#ffffff" opacity="0.8"/>
+  </g>
+
+  <rect x="205" y="155" width="50" height="20" rx="10" fill="#ffffff" opacity="0.2"/>
+  <text x="230" y="169" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#ffffff" text-anchor="middle">RETAIL</text>
+</svg>

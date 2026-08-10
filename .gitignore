@@ -1,0 +1,29 @@
+# Dependencies — rebuilt by composer install
+/vendor
+
+# Uploaded media — 2.8 GB of customer photos, tracked separately as files on disk
+/public/frontend/user_images
+/public/frontend/myproducts
+/public/frontend/profession_logo
+/public/images
+/public/uploads
+/uploads
+/public/*.vcf
+
+# Runtime
+/storage/*.key
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/logs/*
+/bootstrap/cache/*
+npm-debug.log
+error_log
+
+# Local-only env; the original .env from the server is kept as .env.server
+.env.local
+
+# Never commit environment files — they hold live credentials
+.env
+.env.*
+!.env.example

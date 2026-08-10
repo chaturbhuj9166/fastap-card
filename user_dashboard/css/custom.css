@@ -1,0 +1,108 @@
+.profile_main_nav ul.nav.nav-pills {
+    background: #fff !important;
+    padding: 16px 15px;
+    border-radius: 4px;
+}
+
+.profile_main_nav .nav-pills .nav-link.active, .profile_main_nav .nav-pills .show>.nav-link {
+    color: #000;
+    background-color: transparent;
+}
+
+.profile_main_nav .nav-link:hover {
+    /* border-bottom: solid 2px #eee !important; */
+    
+    color: var(--primary);
+    background: var(--dark);
+    border-color: var(--primary);
+
+    border-left: 3px solid var(--secondary);
+    border-radius: 0 30px 30px 0;
+
+}
+
+.profile_main_nav a.nav-link {
+    padding: 8px 8px;
+    margin-left:2px;
+    font-size: 13px;
+}
+
+/*footer.sticky-footer {*/
+/*    width: calc(100% - 200px);*/
+/*}*/
+
+/*.content-wrapper {*/
+/*    margin-left: 200px;*/
+/*}*/
+
+/*#mainNav.fixed-top .sidenav-toggler > .nav-item {*/
+/*    width: 200px;*/
+/*    padding: 0;*/
+/*}*/
+
+/*#mainNav .navbar-collapse .navbar-sidenav > .nav-item {*/
+/*    width: 200px;*/
+/*    padding: 0;*/
+/*}*/
+
+.main_fixed_nav {
+    position: fixed;
+    background: #bdbfc1;
+    width: 352px;
+    padding: 15px 10px;
+    z-index: 9999 !important;
+}
+
+/*.mobile_main_relative {*/
+/*    position: relative;*/
+/*}*/
+
+.main_fixed_content {
+    background: #fff;
+    width: 100%;
+    /*position: absolute;*/
+    /*top: 52px;*/
+        height: 90vh;
+}
+
+.main_fixed_content_nav {
+    width: 87%;
+    /*background: #694b9a;*/
+    margin: 0 auto;
+    height: 100% !important;
+}
+.main_mobile_sidebar {
+    height: 100% !important;
+}
+
+.profile_image_main {
+    height: 100% !important;
+}
+
+
+.profile_image_main iframe {
+    height: 100% !important;
+}
+.userdashboard_sidebar {
+    background: #191C24 !important;
+}
+
+ul#exampleAccordion {
+    background: #191C24 !important;
+}
+#mainNav.fixed-top.navbar-dark .sidenav-toggler {
+    background-color: #191C24 !important;
+    border-top: 1px solid #191C24 !important;
+}
+
+
+nav#mainNav {
+    background: #191C24 !important;
+}
+
+.container-fluid {
+    background-color: #000;
+}
+
+
+

@@ -1,0 +1,206 @@
+@extends('layouts.redesign.agent')
+
+@section('page-title', 'All Orders')
+@section('breadcrumb', 'Orders')
+
+@push('page-styles')
+<style>
+    .filters-bar {
+        display: flex;
+        align-items: center;
+        gap: var(--space-md);
+        margin-bottom: var(--space-lg);
+        flex-wrap: wrap;
+    }
+
+    .filter-tabs {
+        display: flex;
+        background: var(--bg-secondary);
+        border-radius: var(--radius-lg);
+        padding: var(--space-xs);
+    }
+
+    .filter-tab {
+        padding: var(--space-sm) var(--space-lg);
+        border-radius: var(--radius-md);
+        font-size: var(--text-sm);
+        font-weight: var(--font-medium);
+        color: var(--text-secondary);
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        transition: all var(--transition-fast);
+    }
+
+    .filter-tab:hover {
+        color: var(--text-primary);
+    }
+
+    .filter-tab.active {
+        background: var(--bg-primary);
+        color: var(--green-500);
+        box-shadow: var(--shadow-sm);
+    }
+
+    .commission-cell {
+        color: var(--green-500);
+        font-weight: var(--font-semibold);
+    }
+</style>
+@endpush
+
+@section('agent-content')
+<!-- Page Header -->
+<div class="table-header" style="background: var(--card-bg); border: 1px solid var(--card-border); border-radius: var(--radius-xl); padding: var(--space-lg); margin-bottom: var(--space-lg);">
+    <div>
+        <h2 class="table-title">All Orders</h2>
+        <p style="color: var(--text-muted); font-size: var(--text-sm); margin-top: var(--space-xs);">Track orders and commissions from your users</p>
+    </div>
+    <div class="table-actions">
+        <button class="btn btn-secondary btn-sm">
+            <i class="fas fa-download"></i> Export
+        </button>
+    </div>
+</div>
+
+<!-- Filters -->
+<div class="filters-bar">
+    <div class="filter-tabs">
+        <button class="filter-tab active" data-filter="all">All</button>
+        <button class="filter-tab" data-filter="pending">Pending</button>
+        <button class="filter-tab" data-filter="processing">Processing</button>
+        <button class="filter-tab" data-filter="delivered">Delivered</button>
+    </div>
+    <div style="flex: 1;"></div>
+    <div class="table-search">
+        <i class="fas fa-search"></i>
+        <input type="text" id="orderSearch" placeholder="Search orders...">
+    </div>
+</div>
+
+<!-- Orders Table -->
+<div class="table-container">
+    <table class="data-table" id="ordersTable">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Product</th>
+                <th>Amount</th>
+                <th>Commission</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse($orders ?? [] as $order)
+            <tr data-status="{{ strtolower($order->status ?? 'pending') }}">
+                <td><strong>#{{ $order->id }}</strong></td>
+                <td>
+                    <div class="table-cell-user">
+                        <div class="table-avatar">
+                            <img src="{{ asset('assets/images/avatars/default.png') }}" alt="Customer">
+                        </div>
+                        <div class="table-user-info">
+                            <div class="table-user-name">{{ $order->billing_name ?? 'N/A' }}</div>
+                            <div class="table-user-email">{{ $order->billing_email ?? '' }}</div>
+                        </div>
+                    </div>
+                </td>
+                <td>{{ $order->product_name ?? 'N/A' }}</td>
+                <td><strong>₹{{ number_format($order->total_amount ?? 0) }}</strong></td>
+                <td>
+                    @php
+                        $commission = (($order->agent_commission ?? 0) / 100) * ($order->total_amount ?? 0);
+                    @endphp
+                    <span class="commission-cell">₹{{ number_format($commission) }}</span>
+                </td>
+                <td>
+                    @php
+                        $statusClass = 'status-pending';
+                        $status = strtolower($order->status ?? 'pending');
+                        if(in_array($status, ['completed', 'delivered'])) {
+                            $statusClass = 'status-active';
+                        } elseif($status == 'cancelled') {
+                            $statusClass = 'status-inactive';
+                        }
+                    @endphp
+                    <span class="status-badge {{ $statusClass }}">{{ ucfirst($status) }}</span>
+                </td>
+                <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d M Y') }}</td>
+                <td>
+                    <div class="table-action-btns">
+                        <a href="{{ url('/agent/vieworder/'.$order->id) }}" class="table-action-btn view" title="View">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+            @empty
+            <tr>
+                <td colspan="8">
+                    <div class="empty-state">
+                        <div class="empty-state-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <h3 class="empty-state-title">No Orders Yet</h3>
+                        <p class="empty-state-text">Orders from your users will appear here.</p>
+                    </div>
+                </td>
+            </tr>
+            @endforelse
+        </tbody>
+    </table>
+
+    @if(isset($orders) && method_exists($orders, 'hasPages') && $orders->hasPages())
+    <div class="table-footer">
+        <div class="table-info">
+            Showing {{ $orders->firstItem() }} to {{ $orders->lastItem() }} of {{ $orders->total() }} orders
+        </div>
+        <div class="pagination">
+            {{ $orders->links() }}
+        </div>
+    </div>
+    @endif
+</div>
+
+@push('page-scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Filter tabs
+    const filterTabs = document.querySelectorAll('.filter-tab');
+    const tableRows = document.querySelectorAll('#ordersTable tbody tr');
+
+    filterTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            filterTabs.forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+
+            const filter = this.dataset.filter;
+
+            tableRows.forEach(row => {
+                if (filter === 'all') {
+                    row.style.display = '';
+                } else {
+                    const status = row.dataset.status;
+                    row.style.display = status === filter ? '' : 'none';
+                }
+            });
+        });
+    });
+
+    // Search
+    const searchInput = document.getElementById('orderSearch');
+    searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+
+        tableRows.forEach(row => {
+            const text = row.textContent.toLowerCase();
+            row.style.display = text.includes(searchTerm) ? '' : 'none';
+        });
+    });
+});
+</script>
+@endpush
+@endsection

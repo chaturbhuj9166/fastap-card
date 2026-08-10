@@ -1,0 +1,44 @@
+.dataTables_paginate paging_simple_numbers{
+display: none!important;
+}
+
+#example2_paginate{
+display: none!important;
+}
+
+#example2_info{
+text-align: end !important;
+position: relative;
+left: 49em;
+}
+
+.Pagination_1{
+justify-content: right;
+margin-top: 11px;
+}
+
+
+/*.active{*/
+/*padding: 3px 15px;*/
+/*font-size: 18px;*/
+/*border-radius: 4px;*/
+/*border: none;*/
+/*background: linear-gradient( */
+/*45deg , #17ead9, #6078ea)!important;*/
+/*outline: none!important;*/
+/*color: white;*/
+/*}*/
+
+/*.inactive{*/
+
+/*background: linear-gradient( */
+/*45deg , #f54ea2, #ff7676)!important;*/
+/*width: 10%;*/
+/*padding: 3px 15px;*/
+/*font-size: 18px;*/
+/*border-radius: 4px;*/
+/*border: none;*/
+/*outline: none!important;*/
+/*color: white;*/
+/*}*/
+

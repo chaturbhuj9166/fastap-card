@@ -1,0 +1,55 @@
+<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Gradient -->
+  <rect width="400" height="300" fill="url(#influencer-grad)"/>
+  <defs>
+    <linearGradient id="influencer-grad" x1="0" y1="0" x2="400" y2="300">
+      <stop offset="0%" stop-color="#f857a6"/>
+      <stop offset="100%" stop-color="#ff5858"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Decorative Elements -->
+  <circle cx="80" cy="60" r="20" fill="white" opacity="0.2"/>
+  <circle cx="320" cy="80" r="25" fill="white" opacity="0.2"/>
+  <circle cx="350" cy="220" r="30" fill="white" opacity="0.2"/>
+  <circle cx="60" cy="240" r="35" fill="white" opacity="0.2"/>
+
+  <!-- Instagram-like Camera Icon -->
+  <g transform="translate(200, 100)">
+    <rect x="-40" y="-30" width="80" height="60" rx="12" fill="white"/>
+    <circle cx="0" cy="0" r="20" fill="#f857a6"/>
+    <circle cx="0" cy="0" r="15" fill="white" opacity="0.3"/>
+    <circle cx="25" cy="-18" r="5" fill="#f857a6"/>
+  </g>
+
+  <!-- Social Media Icons -->
+  <g transform="translate(130, 180)">
+    <!-- Like Heart -->
+    <path d="M 0 5 L -5 0 Q -8 -3 -5 -7 Q -2 -10 0 -6 Q 2 -10 5 -7 Q 8 -3 5 0 Z" fill="white"/>
+  </g>
+
+  <g transform="translate(170, 180)">
+    <!-- Comment Bubble -->
+    <rect x="-8" y="-8" width="16" height="12" rx="3" fill="white"/>
+    <polygon points="-3,4 0,8 3,4" fill="white"/>
+  </g>
+
+  <g transform="translate(210, 180)">
+    <!-- Share Arrow -->
+    <path d="M 0 -8 L 8 0 L 0 8 M 8 0 L -8 0" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <g transform="translate(250, 180)">
+    <!-- Star -->
+    <path d="M 0 -8 L 2 -2 L 8 -2 L 3 2 L 5 8 L 0 4 L -5 8 L -3 2 L -8 -2 L -2 -2 Z" fill="white"/>
+  </g>
+
+  <!-- Follower Count Display -->
+  <g transform="translate(200, 210)">
+    <rect x="-35" y="-8" width="70" height="16" rx="8" fill="white" opacity="0.9"/>
+    <text x="0" y="2" font-family="Arial" font-size="10" font-weight="bold" fill="#f857a6" text-anchor="middle">10K+</text>
+  </g>
+
+  <!-- Text Label -->
+  <text x="200" y="260" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white" text-anchor="middle">Influencer</text>
+</svg>

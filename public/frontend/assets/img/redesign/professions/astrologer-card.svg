@@ -1,0 +1,42 @@
+<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Gradient -->
+  <rect width="400" height="300" fill="url(#astro-grad)"/>
+  <defs>
+    <linearGradient id="astro-grad" x1="0" y1="0" x2="400" y2="300">
+      <stop offset="0%" stop-color="#360033"/>
+      <stop offset="100%" stop-color="#0b8793"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Stars -->
+  <circle cx="80" cy="60" r="2" fill="white" opacity="0.8"/>
+  <circle cx="320" cy="80" r="2" fill="white" opacity="0.8"/>
+  <circle cx="350" cy="150" r="2" fill="white" opacity="0.8"/>
+  <circle cx="60" cy="220" r="2" fill="white" opacity="0.8"/>
+  <circle cx="340" cy="240" r="2" fill="white" opacity="0.8"/>
+
+  <!-- Zodiac Wheel -->
+  <g transform="translate(200, 110)">
+    <circle cx="0" cy="0" r="45" fill="none" stroke="white" stroke-width="3"/>
+    <circle cx="0" cy="0" r="30" fill="none" stroke="white" stroke-width="2" opacity="0.6"/>
+
+    <!-- Zodiac Symbols -->
+    <text x="0" y="-35" font-family="Arial" font-size="18" fill="white" text-anchor="middle">♈</text>
+    <text x="30" y="-20" font-family="Arial" font-size="18" fill="white" text-anchor="middle">♉</text>
+    <text x="35" y="10" font-family="Arial" font-size="18" fill="white" text-anchor="middle">♊</text>
+    <text x="20" y="35" font-family="Arial" font-size="18" fill="white" text-anchor="middle">♋</text>
+    <text x="-20" y="35" font-family="Arial" font-size="18" fill="white" text-anchor="middle">♌</text>
+    <text x="-35" y="10" font-family="Arial" font-size="18" fill="white" text-anchor="middle">♍</text>
+    <text x="-30" y="-20" font-family="Arial" font-size="18" fill="white" text-anchor="middle">♎</text>
+  </g>
+
+  <!-- Crystal Ball -->
+  <g transform="translate(200, 190)">
+    <ellipse cx="0" cy="15" rx="25" ry="8" fill="white" opacity="0.3"/>
+    <circle cx="0" cy="0" r="22" fill="white" opacity="0.4"/>
+    <circle cx="-8" cy="-8" r="5" fill="white" opacity="0.8"/>
+  </g>
+
+  <!-- Text Label -->
+  <text x="200" y="260" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white" text-anchor="middle">Astrology</text>
+</svg>

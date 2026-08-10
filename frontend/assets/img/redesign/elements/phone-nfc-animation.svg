@@ -1,0 +1,298 @@
+<svg width="500" height="650" viewBox="0 0 500 650" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="phoneBody" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e293b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0f172a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="screenGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e293b;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="profileGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7c3aed;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="cardGradNfc" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7c3aed;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#a855f7;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="coverGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4f46e5;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#7c3aed;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="nfcIconGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#06b6d4;stop-opacity:1" />
+    </linearGradient>
+    <filter id="phoneShadow" x="-20%" y="-10%" width="140%" height="130%">
+      <feDropShadow dx="0" dy="20" stdDeviation="25" flood-color="#000000" flood-opacity="0.4"/>
+    </filter>
+    <filter id="glowEffect" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <clipPath id="screenClip">
+      <rect x="15" y="40" width="220" height="420" rx="15"/>
+    </clipPath>
+  </defs>
+
+  <!-- ANIMATION TIMELINE:
+       0-2s: NFC waiting screen + Card approaching
+       2-4s: NFC detect animation (pulse)
+       4-8s: Profile opening animation
+       8-10s: Profile displayed
+       10s: Loop back to start
+  -->
+
+  <!-- NFC Pulse Rings (behind phone) - Active during tap phase -->
+  <g transform="translate(250, 280)">
+    <circle cx="0" cy="0" r="60" fill="none" stroke="#7c3aed" stroke-width="3" opacity="0">
+      <animate attributeName="r" values="60;180" dur="1s" begin="2s" repeatCount="2"/>
+      <animate attributeName="opacity" values="0.9;0" dur="1s" begin="2s" repeatCount="2"/>
+    </circle>
+    <circle cx="0" cy="0" r="60" fill="none" stroke="#a855f7" stroke-width="2" opacity="0">
+      <animate attributeName="r" values="60;180" dur="1s" begin="2.3s" repeatCount="2"/>
+      <animate attributeName="opacity" values="0.7;0" dur="1s" begin="2.3s" repeatCount="2"/>
+    </circle>
+    <circle cx="0" cy="0" r="60" fill="none" stroke="#ec4899" stroke-width="2" opacity="0">
+      <animate attributeName="r" values="60;180" dur="1s" begin="2.6s" repeatCount="2"/>
+      <animate attributeName="opacity" values="0.5;0" dur="1s" begin="2.6s" repeatCount="2"/>
+    </circle>
+  </g>
+
+  <!-- Phone -->
+  <g transform="translate(125, 50)" filter="url(#phoneShadow)">
+    <!-- Phone body -->
+    <rect x="0" y="0" width="250" height="500" rx="35" fill="url(#phoneBody)" stroke="#334155" stroke-width="2"/>
+
+    <!-- Side buttons -->
+    <rect x="-3" y="100" width="3" height="40" rx="1" fill="#475569"/>
+    <rect x="-3" y="160" width="3" height="60" rx="1" fill="#475569"/>
+    <rect x="250" y="130" width="3" height="50" rx="1" fill="#475569"/>
+
+    <!-- Camera notch -->
+    <rect x="90" y="10" width="70" height="25" rx="12" fill="#0f172a"/>
+    <circle cx="125" cy="22" r="6" fill="#1e293b"/>
+    <circle cx="125" cy="22" r="3" fill="#334155"/>
+
+    <!-- Screen area -->
+    <rect x="15" y="40" width="220" height="420" rx="20" fill="url(#screenGrad)"/>
+
+    <!-- ===== SCREEN STATE 1: NFC Waiting (0-4s) ===== -->
+    <g clip-path="url(#screenClip)">
+      <g>
+        <!-- Fades out at 4s when profile opens -->
+        <animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.35;0.4;1" dur="10s" repeatCount="indefinite"/>
+
+        <!-- NFC Icon centered on screen -->
+        <g transform="translate(125, 220)">
+          <!-- Outer pulsing ring -->
+          <circle cx="0" cy="0" r="80" fill="none" stroke="#7c3aed" stroke-width="2" opacity="0.3">
+            <animate attributeName="r" values="80;90;80" dur="2s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.3;0.1;0.3" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="0" cy="0" r="60" fill="none" stroke="#7c3aed" stroke-width="2" opacity="0.5">
+            <animate attributeName="r" values="60;70;60" dur="2s" begin="0.3s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.5;0.2;0.5" dur="2s" begin="0.3s" repeatCount="indefinite"/>
+          </circle>
+
+          <!-- NFC Symbol -->
+          <circle cx="0" cy="0" r="45" fill="#7c3aed" opacity="0.15"/>
+          <g transform="translate(-25, -25)">
+            <path d="M 0 0 Q 50 0 50 50" stroke="url(#nfcIconGrad)" stroke-width="6" fill="none" stroke-linecap="round"/>
+            <path d="M 0 15 Q 35 15 35 50" stroke="url(#nfcIconGrad)" stroke-width="5" fill="none" stroke-linecap="round"/>
+            <path d="M 0 30 Q 20 30 20 50" stroke="url(#nfcIconGrad)" stroke-width="4" fill="none" stroke-linecap="round"/>
+            <circle cx="0" cy="50" r="6" fill="url(#nfcIconGrad)"/>
+          </g>
+        </g>
+
+        <!-- "Hold card to phone" text -->
+        <text x="125" y="350" font-family="Arial, sans-serif" font-size="14" fill="#94a3b8" text-anchor="middle">Hold card to phone</text>
+
+        <!-- Animated dots -->
+        <g transform="translate(95, 370)">
+          <circle cx="0" cy="0" r="4" fill="#7c3aed" opacity="0.3">
+            <animate attributeName="opacity" values="0.3;1;0.3" dur="1.5s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="20" cy="0" r="4" fill="#7c3aed" opacity="0.3">
+            <animate attributeName="opacity" values="0.3;1;0.3" dur="1.5s" begin="0.3s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="40" cy="0" r="4" fill="#7c3aed" opacity="0.3">
+            <animate attributeName="opacity" values="0.3;1;0.3" dur="1.5s" begin="0.6s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="60" cy="0" r="4" fill="#7c3aed" opacity="0.3">
+            <animate attributeName="opacity" values="0.3;1;0.3" dur="1.5s" begin="0.9s" repeatCount="indefinite"/>
+          </circle>
+        </g>
+      </g>
+    </g>
+
+    <!-- ===== SCREEN STATE 2: Profile Opening (4-10s) ===== -->
+    <g clip-path="url(#screenClip)">
+      <g opacity="0">
+        <!-- Fades in at 4s when NFC detected -->
+        <animate attributeName="opacity" values="0;0;1;1" keyTimes="0;0.35;0.45;1" dur="10s" repeatCount="indefinite"/>
+
+        <!-- Cover photo -->
+        <rect x="15" y="40" width="220" height="100" fill="url(#coverGradient)"/>
+        <!-- Pattern overlay on cover -->
+        <g opacity="0.15">
+          <circle cx="60" cy="70" r="40" fill="#ffffff"/>
+          <circle cx="180" cy="90" r="55" fill="#ffffff"/>
+          <circle cx="200" cy="50" r="30" fill="#ffffff"/>
+        </g>
+
+        <!-- Profile picture -->
+        <g transform="translate(125, 125)">
+          <circle cx="0" cy="0" r="45" fill="#0f172a" stroke="#1e293b" stroke-width="4"/>
+          <circle cx="0" cy="0" r="38" fill="url(#profileGrad)"/>
+          <text x="0" y="10" font-family="Arial, sans-serif" font-size="28" fill="#ffffff" font-weight="bold" text-anchor="middle">JD</text>
+        </g>
+
+        <!-- Name and title -->
+        <text x="125" y="195" font-family="Arial, sans-serif" font-size="18" fill="#ffffff" font-weight="bold" text-anchor="middle">John Doe</text>
+        <text x="125" y="215" font-family="Arial, sans-serif" font-size="11" fill="#94a3b8" text-anchor="middle">Senior Product Designer</text>
+
+        <!-- Social icons -->
+        <g transform="translate(55, 240)">
+          <circle cx="20" cy="0" r="18" fill="#334155"/>
+          <circle cx="20" cy="0" r="14" fill="#0077b5"/>
+          <circle cx="70" cy="0" r="18" fill="#334155"/>
+          <circle cx="70" cy="0" r="14" fill="#1da1f2"/>
+          <circle cx="120" cy="0" r="18" fill="#334155"/>
+          <circle cx="120" cy="0" r="14" fill="#e4405f"/>
+        </g>
+
+        <!-- Contact info rows -->
+        <g transform="translate(35, 285)">
+          <!-- Email row -->
+          <rect x="0" y="0" width="180" height="40" rx="10" fill="#334155"/>
+          <circle cx="22" cy="20" r="12" fill="#475569"/>
+          <rect x="42" y="10" width="100" height="8" rx="3" fill="#64748b"/>
+          <rect x="42" y="24" width="70" height="6" rx="2" fill="#475569"/>
+
+          <!-- Phone row -->
+          <rect x="0" y="50" width="180" height="40" rx="10" fill="#334155"/>
+          <circle cx="22" cy="70" r="12" fill="#475569"/>
+          <rect x="42" y="60" width="90" height="8" rx="3" fill="#64748b"/>
+          <rect x="42" y="74" width="60" height="6" rx="2" fill="#475569"/>
+        </g>
+
+        <!-- Save contact button -->
+        <rect x="35" y="395" width="180" height="50" rx="25" fill="url(#profileGrad)"/>
+        <text x="125" y="425" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" font-weight="bold" text-anchor="middle">Save Contact</text>
+      </g>
+    </g>
+
+    <!-- Home indicator -->
+    <rect x="90" y="475" width="70" height="5" rx="2" fill="#475569"/>
+  </g>
+
+  <!-- NFC Card Animation -->
+  <g>
+    <!-- Card moves up during 0-2s, stays during tap 2-4s, moves back down 4-5s -->
+    <animateTransform
+      attributeName="transform"
+      type="translate"
+      values="50,580; 50,480; 50,480; 50,580; 50,580"
+      keyTimes="0; 0.2; 0.4; 0.5; 1"
+      dur="10s"
+      repeatCount="indefinite"/>
+
+    <g transform="rotate(-12)">
+      <rect x="0" y="0" width="150" height="95" rx="12" fill="url(#cardGradNfc)" filter="url(#glowEffect)"/>
+
+      <!-- Card chip -->
+      <rect x="15" y="15" width="35" height="25" rx="4" fill="#fbbf24" stroke="#f97316" stroke-width="1.5"/>
+      <g stroke="#000000" stroke-width="0.8" opacity="0.3">
+        <line x1="20" y1="19" x2="20" y2="36"/>
+        <line x1="26" y1="19" x2="26" y2="36"/>
+        <line x1="32" y1="19" x2="32" y2="36"/>
+        <line x1="38" y1="19" x2="38" y2="36"/>
+        <line x1="44" y1="19" x2="44" y2="36"/>
+      </g>
+
+      <!-- Card text -->
+      <text x="65" y="30" font-family="Arial, sans-serif" font-size="16" fill="#ffffff" font-weight="bold">FASTAP</text>
+      <rect x="15" y="55" width="90" height="5" rx="2" fill="#ffffff" opacity="0.5"/>
+      <rect x="15" y="68" width="60" height="5" rx="2" fill="#ffffff" opacity="0.3"/>
+
+      <!-- NFC symbol on card -->
+      <g transform="translate(115, 60)">
+        <path d="M 0 0 Q 20 0 20 20" stroke="#ffffff" stroke-width="2.5" fill="none" opacity="0.9"/>
+        <path d="M 0 7 Q 13 7 13 20" stroke="#ffffff" stroke-width="2" fill="none" opacity="0.8"/>
+        <circle cx="0" cy="20" r="3" fill="#ffffff" opacity="0.9"/>
+      </g>
+    </g>
+
+    <!-- Card glow when near phone (during 2-4s) -->
+    <ellipse cx="75" cy="50" rx="100" ry="70" fill="#7c3aed" opacity="0">
+      <animate attributeName="opacity" values="0;0;0.3;0.3;0;0" keyTimes="0;0.15;0.2;0.4;0.45;1" dur="10s" repeatCount="indefinite"/>
+    </ellipse>
+  </g>
+
+  <!-- Data transfer particles (during 2-4s) -->
+  <g opacity="0">
+    <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.15;0.2;0.4;0.45;1" dur="10s" repeatCount="indefinite"/>
+
+    <circle cx="180" cy="500" r="5" fill="#ec4899">
+      <animate attributeName="cy" values="500;280" dur="0.8s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="1;0" dur="0.8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="200" cy="510" r="4" fill="#a855f7">
+      <animate attributeName="cy" values="510;260" dur="0.9s" begin="0.2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="1;0" dur="0.9s" begin="0.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="160" cy="505" r="3" fill="#7c3aed">
+      <animate attributeName="cy" values="505;300" dur="0.7s" begin="0.4s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="1;0" dur="0.7s" begin="0.4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="220" cy="495" r="4" fill="#3b82f6">
+      <animate attributeName="cy" values="495;290" dur="0.85s" begin="0.3s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="1;0" dur="0.85s" begin="0.3s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Success checkmark (appears after profile loads - 5s onwards) -->
+  <g transform="translate(420, 120)" opacity="0">
+    <animate attributeName="opacity" values="0;0;0;1;1;0" keyTimes="0;0.45;0.5;0.55;0.9;1" dur="10s" repeatCount="indefinite"/>
+    <circle cx="0" cy="0" r="30" fill="#10b981" opacity="0.2"/>
+    <circle cx="0" cy="0" r="22" fill="#10b981"/>
+    <path d="M -10 0 L -4 6 L 10 -7" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+
+  <!-- Hand/finger indicator pointing at card -->
+  <g transform="translate(30, 550)" opacity="0.8">
+    <animate attributeName="opacity" values="0.8;0.8;0;0" keyTimes="0;0.4;0.45;1" dur="10s" repeatCount="indefinite"/>
+    <path d="M 0 0 L 30 -20 L 35 -15 L 10 0 Z" fill="#f59e0b"/>
+    <ellipse cx="5" cy="5" rx="12" ry="8" fill="#f59e0b"/>
+  </g>
+
+  <!-- Status text below phone -->
+  <g transform="translate(250, 590)">
+    <!-- "Tap your card" text (during 0-2s) -->
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="16" fill="#7c3aed" font-weight="bold" text-anchor="middle" opacity="0">
+      Tap your card
+      <animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.15;0.2;1" dur="10s" repeatCount="indefinite"/>
+    </text>
+
+    <!-- "Connecting..." text (during 2-4s) -->
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="16" fill="#3b82f6" font-weight="bold" text-anchor="middle" opacity="0">
+      Connecting...
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.15;0.2;0.4;0.45;1" dur="10s" repeatCount="indefinite"/>
+    </text>
+
+    <!-- "Profile Loaded!" text (during 4-8s) -->
+    <text x="0" y="0" font-family="Arial, sans-serif" font-size="16" fill="#10b981" font-weight="bold" text-anchor="middle" opacity="0">
+      Profile Loaded!
+      <animate attributeName="opacity" values="0;0;0;1;1;0" keyTimes="0;0.4;0.5;0.55;0.85;1" dur="10s" repeatCount="indefinite"/>
+    </text>
+  </g>
+
+  <!-- Subtitle -->
+  <text x="250" y="620" font-family="Arial, sans-serif" font-size="12" fill="#64748b" text-anchor="middle">Instant contact transfer</text>
+</svg>

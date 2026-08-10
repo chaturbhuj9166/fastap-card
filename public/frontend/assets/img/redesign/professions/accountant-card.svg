@@ -1,0 +1,37 @@
+<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Gradient -->
+  <rect width="400" height="300" fill="url(#accountant-grad)"/>
+  <defs>
+    <linearGradient id="accountant-grad" x1="0" y1="0" x2="400" y2="300">
+      <stop offset="0%" stop-color="#11998e"/>
+      <stop offset="100%" stop-color="#38ef7d"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Decorative Elements -->
+  <circle cx="350" cy="50" r="30" fill="white" opacity="0.1"/>
+  <circle cx="50" cy="250" r="40" fill="white" opacity="0.1"/>
+
+  <!-- Calculator Icon -->
+  <g transform="translate(200, 120)">
+    <rect x="-35" y="-50" width="70" height="100" rx="6" fill="white"/>
+    <rect x="-30" y="-45" width="60" height="20" rx="3" fill="#11998e"/>
+
+    <!-- Calculator Buttons -->
+    <circle cx="-20" cy="-15" r="5" fill="#11998e" opacity="0.3"/>
+    <circle cx="0" cy="-15" r="5" fill="#11998e" opacity="0.3"/>
+    <circle cx="20" cy="-15" r="5" fill="#11998e" opacity="0.3"/>
+    <circle cx="-20" cy="5" r="5" fill="#11998e" opacity="0.3"/>
+    <circle cx="0" cy="5" r="5" fill="#11998e" opacity="0.3"/>
+    <circle cx="20" cy="5" r="5" fill="#11998e" opacity="0.3"/>
+    <circle cx="-20" cy="25" r="5" fill="#11998e" opacity="0.3"/>
+    <circle cx="0" cy="25" r="5" fill="#11998e" opacity="0.3"/>
+    <circle cx="20" cy="25" r="5" fill="#38ef7d"/>
+  </g>
+
+  <!-- Rupee Symbol -->
+  <text x="200" y="200" font-family="Arial, sans-serif" font-size="40" font-weight="bold" fill="white" text-anchor="middle" opacity="0.6">₹</text>
+
+  <!-- Text Label -->
+  <text x="200" y="250" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white" text-anchor="middle">CA &amp; Finance</text>
+</svg>

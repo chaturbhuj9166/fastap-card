@@ -1,0 +1,126 @@
+<svg width="500" height="500" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="phoneGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e293b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#334155;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7c3aed;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#a855f7;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ec4899;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f472b6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background Circles -->
+  <circle cx="250" cy="250" r="200" fill="#7c3aed" opacity="0.05"/>
+  <circle cx="250" cy="250" r="150" fill="#ec4899" opacity="0.05"/>
+  <circle cx="250" cy="250" r="100" fill="#3b82f6" opacity="0.05"/>
+
+  <!-- Smartphone -->
+  <g transform="translate(180, 120)">
+    <rect x="0" y="0" width="140" height="260" rx="20" fill="url(#phoneGrad)" stroke="#475569" stroke-width="3"/>
+    <rect x="5" y="10" width="130" height="200" rx="8" fill="#0f172a"/>
+
+    <!-- Screen Content - NFC Icon -->
+    <g transform="translate(45, 80)">
+      <circle cx="25" cy="25" r="35" fill="#7c3aed" opacity="0.2"/>
+      <g transform="translate(10, 10)">
+        <path d="M 0 0 Q 30 0 30 30" stroke="#7c3aed" stroke-width="4" fill="none"/>
+        <path d="M 0 10 Q 20 10 20 30" stroke="#7c3aed" stroke-width="4" fill="none"/>
+        <path d="M 0 20 Q 10 20 10 30" stroke="#7c3aed" stroke-width="4" fill="none"/>
+        <circle cx="0" cy="30" r="3" fill="#7c3aed"/>
+      </g>
+    </g>
+
+    <!-- Phone Home Button -->
+    <circle cx="70" cy="235" r="12" fill="#334155"/>
+  </g>
+
+  <!-- NFC Card (approaching phone) -->
+  <g transform="translate(60, 200) rotate(-15)">
+    <rect x="0" y="0" width="120" height="75" rx="8" fill="url(#cardGrad)" stroke="#9333ea" stroke-width="2"/>
+
+    <!-- Card Chip -->
+    <rect x="10" y="10" width="30" height="22" rx="3" fill="#fbbf24" stroke="#f97316" stroke-width="1.5"/>
+    <line x1="13" y1="13" x2="13" y2="29" stroke="#000000" stroke-width="0.8" opacity="0.3"/>
+    <line x1="17" y1="13" x2="17" y2="29" stroke="#000000" stroke-width="0.8" opacity="0.3"/>
+    <line x1="21" y1="13" x2="21" y2="29" stroke="#000000" stroke-width="0.8" opacity="0.3"/>
+    <line x1="25" y1="13" x2="25" y2="29" stroke="#000000" stroke-width="0.8" opacity="0.3"/>
+    <line x1="29" y1="13" x2="29" y2="29" stroke="#000000" stroke-width="0.8" opacity="0.3"/>
+    <line x1="33" y1="13" x2="33" y2="29" stroke="#000000" stroke-width="0.8" opacity="0.3"/>
+    <line x1="37" y1="13" x2="37" y2="29" stroke="#000000" stroke-width="0.8" opacity="0.3"/>
+
+    <!-- Card Text -->
+    <text x="50" y="25" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="bold">FASTAP</text>
+    <text x="10" y="50" font-family="Arial, sans-serif" font-size="8" fill="#ffffff" opacity="0.9">Digital Business Card</text>
+
+    <!-- NFC Symbol on Card -->
+    <g transform="translate(85, 45)">
+      <path d="M 0 0 Q 18 0 18 18" stroke="#ffffff" stroke-width="2" fill="none" opacity="0.8"/>
+      <path d="M 0 6 Q 12 6 12 18" stroke="#ffffff" stroke-width="2" fill="none" opacity="0.8"/>
+      <path d="M 0 12 Q 6 12 6 18" stroke="#ffffff" stroke-width="2" fill="none" opacity="0.8"/>
+      <circle cx="0" cy="18" r="2" fill="#ffffff" opacity="0.8"/>
+    </g>
+  </g>
+
+  <!-- Hand/Finger Tap Gesture -->
+  <g transform="translate(140, 260)">
+    <!-- Finger -->
+    <ellipse cx="30" cy="-20" rx="15" ry="25" fill="#f59e0b" transform="rotate(-30 30 -20)"/>
+    <rect x="20" y="-15" width="20" height="40" rx="8" fill="#f59e0b" transform="rotate(-15 30 5)"/>
+    <circle cx="30" cy="25" r="15" fill="#f59e0b"/>
+  </g>
+
+  <!-- Signal Waves (from card to phone) -->
+  <g transform="translate(250, 280)">
+    <path d="M -50 0 Q -25 -20 0 0" stroke="url(#glowGrad)" stroke-width="3" fill="none" opacity="0.6">
+      <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
+    </path>
+    <path d="M -55 0 Q -27.5 -25 0 0" stroke="url(#glowGrad)" stroke-width="2.5" fill="none" opacity="0.4">
+      <animate attributeName="opacity" values="0.4;0.8;0.4" dur="2s" begin="0.3s" repeatCount="indefinite"/>
+    </path>
+    <path d="M -60 0 Q -30 -30 0 0" stroke="url(#glowGrad)" stroke-width="2" fill="none" opacity="0.3">
+      <animate attributeName="opacity" values="0.3;0.6;0.3" dur="2s" begin="0.6s" repeatCount="indefinite"/>
+    </path>
+  </g>
+
+  <!-- Data Transfer Particles -->
+  <g>
+    <circle cx="220" cy="270" r="4" fill="#ec4899">
+      <animate attributeName="cx" values="220;280;340" dur="1.5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="1;1;0" dur="1.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="210" cy="285" r="3" fill="#f472b6">
+      <animate attributeName="cx" values="210;270;330" dur="1.8s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="1;1;0" dur="1.8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="225" cy="295" r="3.5" fill="#a855f7">
+      <animate attributeName="cx" values="225;285;345" dur="1.6s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="1;1;0" dur="1.6s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Success Indicators -->
+  <g transform="translate(370, 200)">
+    <circle cx="0" cy="0" r="25" fill="#10b981" opacity="0.2"/>
+    <circle cx="0" cy="0" r="15" fill="#10b981"/>
+    <path d="M -8 0 L -3 5 L 8 -7" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+
+  <!-- Connected Icon -->
+  <g transform="translate(350, 350)">
+    <circle cx="0" cy="0" r="8" fill="#3b82f6"/>
+    <circle cx="30" cy="0" r="8" fill="#3b82f6"/>
+    <line x1="8" y1="0" x2="22" y2="0" stroke="#3b82f6" stroke-width="3"/>
+    <circle cx="15" cy="0" r="4" fill="#ec4899">
+      <animate attributeName="cx" values="8;22;8" dur="2s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Text Labels -->
+  <text x="250" y="420" font-family="Arial, sans-serif" font-size="24" fill="#7c3aed" font-weight="bold" text-anchor="middle">Tap to Share</text>
+  <text x="250" y="445" font-family="Arial, sans-serif" font-size="14" fill="#64748b" text-anchor="middle">Instant contact transfer</text>
+</svg>

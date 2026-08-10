@@ -1,0 +1,29 @@
+<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Gradient -->
+  <rect width="400" height="300" fill="url(#fitness-grad)"/>
+  <defs>
+    <linearGradient id="fitness-grad" x1="0" y1="0" x2="400" y2="300">
+      <stop offset="0%" stop-color="#fa709a"/>
+      <stop offset="100%" stop-color="#fee140"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Decorative Circles -->
+  <circle cx="350" cy="50" r="25" fill="white" opacity="0.15"/>
+  <circle cx="50" cy="250" r="35" fill="white" opacity="0.15"/>
+
+  <!-- Dumbbell Icon -->
+  <g transform="translate(200, 120)">
+    <rect x="-60" y="-8" width="120" height="16" rx="4" fill="white"/>
+    <rect x="-75" y="-20" width="25" height="40" rx="4" fill="white"/>
+    <rect x="50" y="-20" width="25" height="40" rx="4" fill="white"/>
+    <circle cx="-62.5" cy="0" r="8" fill="#fa709a"/>
+    <circle cx="62.5" cy="0" r="8" fill="#fa709a"/>
+  </g>
+
+  <!-- Heart Rate Line -->
+  <path d="M 80 180 L 120 180 L 135 160 L 150 200 L 165 180 L 320 180" stroke="white" stroke-width="3" fill="none" opacity="0.6"/>
+
+  <!-- Text Label -->
+  <text x="200" y="250" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white" text-anchor="middle">Fitness &amp; Gym</text>
+</svg>

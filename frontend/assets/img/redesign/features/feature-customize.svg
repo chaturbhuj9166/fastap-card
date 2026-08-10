@@ -1,0 +1,137 @@
+<svg width="400" height="320" viewBox="0 0 400 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="profileCardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e293b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0f172a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7c3aed;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="coverGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4f46e5;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#7c3aed;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
+    </linearGradient>
+    <filter id="profileShadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#7c3aed" flood-opacity="0.3"/>
+    </filter>
+    <clipPath id="coverClip">
+      <rect x="0" y="0" width="200" height="70" rx="15"/>
+    </clipPath>
+  </defs>
+
+  <!-- Main profile card -->
+  <g transform="translate(100, 30)" filter="url(#profileShadow)">
+    <rect x="0" y="0" width="200" height="260" rx="15" fill="url(#profileCardGrad)" stroke="#334155" stroke-width="1"/>
+
+    <!-- Cover image area -->
+    <g clip-path="url(#coverClip)">
+      <rect x="0" y="0" width="200" height="70" fill="url(#coverGrad)"/>
+      <!-- Pattern overlay -->
+      <g opacity="0.3">
+        <circle cx="30" cy="20" r="40" fill="#ffffff" opacity="0.1"/>
+        <circle cx="150" cy="50" r="60" fill="#ffffff" opacity="0.1"/>
+        <circle cx="180" cy="10" r="30" fill="#ffffff" opacity="0.1"/>
+      </g>
+    </g>
+
+    <!-- Profile picture -->
+    <circle cx="100" cy="70" r="38" fill="#0f172a" stroke="#1e293b" stroke-width="4"/>
+    <circle cx="100" cy="70" r="32" fill="url(#accentGrad)"/>
+    <text x="100" y="78" font-family="Arial, sans-serif" font-size="28" fill="#ffffff" font-weight="bold" text-anchor="middle">JD</text>
+
+    <!-- Name -->
+    <text x="100" y="130" font-family="Arial, sans-serif" font-size="16" fill="#ffffff" font-weight="bold" text-anchor="middle">John Doe</text>
+    <text x="100" y="148" font-family="Arial, sans-serif" font-size="11" fill="#94a3b8" text-anchor="middle">Senior Product Designer</text>
+
+    <!-- Social links -->
+    <g transform="translate(35, 165)">
+      <circle cx="20" cy="0" r="15" fill="#334155"/>
+      <text x="20" y="5" font-family="Arial, sans-serif" font-size="12" fill="#3b82f6" text-anchor="middle">in</text>
+
+      <circle cx="65" cy="0" r="15" fill="#334155"/>
+      <text x="65" y="5" font-family="Arial, sans-serif" font-size="12" fill="#1da1f2" text-anchor="middle">X</text>
+
+      <circle cx="110" cy="0" r="15" fill="#334155"/>
+      <text x="110" y="5" font-family="Arial, sans-serif" font-size="10" fill="#e4405f" text-anchor="middle">IG</text>
+    </g>
+
+    <!-- Contact button -->
+    <rect x="25" y="200" width="150" height="40" rx="20" fill="url(#accentGrad)"/>
+    <text x="100" y="225" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" font-weight="bold" text-anchor="middle">Save Contact</text>
+  </g>
+
+  <!-- Color palette selector -->
+  <g transform="translate(320, 50)">
+    <rect x="0" y="0" width="60" height="180" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+
+    <!-- Color options -->
+    <circle cx="30" cy="25" r="12" fill="#7c3aed" stroke="#ffffff" stroke-width="2"/>
+    <circle cx="30" cy="55" r="12" fill="#ec4899"/>
+    <circle cx="30" cy="85" r="12" fill="#3b82f6"/>
+    <circle cx="30" cy="115" r="12" fill="#10b981"/>
+    <circle cx="30" cy="145" r="12" fill="#f59e0b"/>
+
+    <!-- Selected indicator -->
+    <path d="M 25 22 L 28 26 L 36 18" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+
+  <!-- Font style selector -->
+  <g transform="translate(20, 80)">
+    <rect x="0" y="0" width="60" height="140" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+
+    <text x="30" y="30" font-family="Arial, sans-serif" font-size="16" fill="#ffffff" font-weight="bold" text-anchor="middle">Aa</text>
+    <text x="30" y="65" font-family="Georgia, serif" font-size="16" fill="#94a3b8" text-anchor="middle">Aa</text>
+    <text x="30" y="100" font-family="Courier, monospace" font-size="14" fill="#94a3b8" text-anchor="middle">Aa</text>
+
+    <!-- Selected indicator -->
+    <rect x="5" y="10" width="50" height="30" rx="5" fill="none" stroke="#7c3aed" stroke-width="2"/>
+  </g>
+
+  <!-- Layout options -->
+  <g transform="translate(20, 240)">
+    <rect x="0" y="0" width="60" height="60" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+
+    <!-- Grid icon -->
+    <g transform="translate(15, 15)">
+      <rect x="0" y="0" width="12" height="12" rx="2" fill="#7c3aed"/>
+      <rect x="18" y="0" width="12" height="12" rx="2" fill="#475569"/>
+      <rect x="0" y="18" width="12" height="12" rx="2" fill="#475569"/>
+      <rect x="18" y="18" width="12" height="12" rx="2" fill="#475569"/>
+    </g>
+  </g>
+
+  <!-- Edit indicators -->
+  <g transform="translate(285, 85)">
+    <circle cx="0" cy="0" r="14" fill="#1e293b" stroke="#7c3aed" stroke-width="2"/>
+    <path d="M -4 0 L 0 -4 L 4 0 L 0 4 Z" fill="#7c3aed" transform="rotate(45)"/>
+    <line x1="-3" y1="3" x2="3" y2="-3" stroke="#7c3aed" stroke-width="2"/>
+  </g>
+
+  <!-- Floating decorative elements -->
+  <g opacity="0.6">
+    <rect x="340" y="260" width="15" height="15" rx="3" fill="#ec4899" opacity="0.5">
+      <animate attributeName="y" values="260;250;260" dur="3s" repeatCount="indefinite"/>
+    </rect>
+    <circle cx="50" cy="50" r="8" fill="#3b82f6" opacity="0.5">
+      <animate attributeName="cy" values="50;60;50" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="370" cy="150" r="6" fill="#7c3aed" opacity="0.6">
+      <animate attributeName="cx" values="370;380;370" dur="3.5s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Sparkle effects -->
+  <g fill="#ffffff">
+    <circle cx="150" cy="25" r="2" opacity="0.8">
+      <animate attributeName="opacity" values="0.8;0.2;0.8" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="250" cy="40" r="1.5" opacity="0.6">
+      <animate attributeName="opacity" values="0.6;0.1;0.6" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="180" cy="55" r="1" opacity="0.7">
+      <animate attributeName="opacity" values="0.7;0.2;0.7" dur="1.8s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+</svg>

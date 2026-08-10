@@ -1,0 +1,190 @@
+<svg width="400" height="500" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="robotBody" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7c3aed;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#a855f7;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="phoneGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1f2937;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#374151;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ec4899;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f472b6;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="tapGlow">
+      <stop offset="0%" style="stop-color:#10b981;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#10b981;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Tap action glow effect -->
+  <ellipse cx="310" cy="280" rx="50" ry="50" fill="url(#tapGlow)">
+    <animate attributeName="rx" values="50;65;50" dur="1.5s" repeatCount="indefinite"/>
+    <animate attributeName="ry" values="50;65;50" dur="1.5s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.6;0.3;0.6" dur="1.5s" repeatCount="indefinite"/>
+  </ellipse>
+
+  <!-- Robot Head -->
+  <g id="head">
+    <rect x="145" y="75" width="110" height="100" rx="24" fill="url(#robotBody)" stroke="#6d28d9" stroke-width="3"/>
+
+    <!-- Antenna -->
+    <line x1="200" y1="75" x2="200" y2="45" stroke="#ec4899" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="200" cy="38" r="9" fill="#ec4899"/>
+
+    <!-- Signal pulses from antenna -->
+    <circle cx="200" cy="38" r="12" stroke="#ec4899" stroke-width="2" fill="none" opacity="0.5">
+      <animate attributeName="r" values="12;20;12" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.5;0;0.5" dur="2s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- Eyes - excited expression -->
+    <circle cx="175" cy="110" r="14" fill="#ffffff"/>
+    <circle cx="225" cy="110" r="14" fill="#ffffff"/>
+    <circle cx="177" cy="112" r="9" fill="#6d28d9"/>
+    <circle cx="227" cy="112" r="9" fill="#6d28d9"/>
+
+    <!-- Excited highlight in eyes -->
+    <circle cx="173" cy="108" r="4" fill="#ffffff"/>
+    <circle cx="223" cy="108" r="4" fill="#ffffff"/>
+
+    <!-- Happy smile -->
+    <path d="M 165 140 Q 200 160 235 140" stroke="#ffffff" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+    <!-- Cheek blush -->
+    <ellipse cx="155" cy="135" rx="8" ry="5" fill="#ec4899" opacity="0.4"/>
+    <ellipse cx="245" cy="135" rx="8" ry="5" fill="#ec4899" opacity="0.4"/>
+  </g>
+
+  <!-- Robot Body -->
+  <g id="body">
+    <rect x="125" y="185" width="150" height="155" rx="28" fill="url(#robotBody)" stroke="#6d28d9" stroke-width="3"/>
+
+    <!-- Chest panel with NFC indicator -->
+    <rect x="150" y="215" width="100" height="95" rx="15" fill="#ffffff" opacity="0.15"/>
+
+    <!-- NFC tap icon on chest -->
+    <g transform="translate(200, 262)">
+      <!-- Hand tapping gesture -->
+      <path d="M -15 -15 L -15 5 L -8 5 L -8 -10 L -3 -10 L -3 5 L 3 5 L 3 -12 L 8 -12 L 8 5 L 15 5 L 15 -8 L 15 10 Q 15 15 10 15 L -10 15 Q -15 15 -15 10 Z" fill="#ffffff" opacity="0.8"/>
+
+      <!-- Tap indicator lines -->
+      <line x1="0" y1="-25" x2="0" y2="-20" stroke="#10b981" stroke-width="2" stroke-linecap="round"/>
+      <line x1="-6" y1="-23" x2="-3" y2="-20" stroke="#10b981" stroke-width="2" stroke-linecap="round"/>
+      <line x1="6" y1="-23" x2="3" y2="-20" stroke="#10b981" stroke-width="2" stroke-linecap="round"/>
+    </g>
+
+    <!-- Activity lights -->
+    <circle cx="145" cy="200" r="5" fill="#10b981">
+      <animate attributeName="opacity" values="1;0.3;1" dur="1s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="255" cy="200" r="5" fill="#3b82f6">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="1s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Arms -->
+  <g id="arms">
+    <!-- Left arm - relaxed position -->
+    <rect x="70" y="205" width="45" height="95" rx="18" fill="url(#robotBody)" stroke="#6d28d9" stroke-width="3"/>
+    <circle cx="92" cy="310" r="24" fill="url(#robotBody)" stroke="#6d28d9" stroke-width="3"/>
+    <circle cx="92" cy="310" r="15" fill="#a855f7" opacity="0.3"/>
+
+    <!-- Right arm - extended holding NFC card -->
+    <g id="rightArm">
+      <rect x="285" y="205" width="45" height="95" rx="18" fill="url(#robotBody)" stroke="#6d28d9" stroke-width="3"/>
+      <circle cx="308" cy="310" r="24" fill="url(#robotBody)" stroke="#6d28d9" stroke-width="3"/>
+      <circle cx="308" cy="310" r="15" fill="#a855f7" opacity="0.3"/>
+    </g>
+  </g>
+
+  <!-- Smartphone being held -->
+  <g id="smartphone" transform="translate(85, 140)">
+    <rect x="0" y="0" width="70" height="120" rx="10" fill="url(#phoneGrad)" stroke="#1f2937" stroke-width="3"/>
+
+    <!-- Screen -->
+    <rect x="6" y="12" width="58" height="96" rx="5" fill="#60a5fa" opacity="0.2"/>
+    <rect x="6" y="12" width="58" height="96" rx="5" fill="url(#phoneGrad)" opacity="0.3"/>
+
+    <!-- Screen content - NFC ready indicator -->
+    <circle cx="35" cy="50" r="15" stroke="#10b981" stroke-width="3" fill="none"/>
+    <circle cx="35" cy="50" r="20" stroke="#10b981" stroke-width="2" fill="none" opacity="0.4">
+      <animate attributeName="r" values="20;25;20" dur="1.5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.4;0;0.4" dur="1.5s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- NFC symbol on screen -->
+    <path d="M 28 45 L 28 55 M 28 45 L 34 50 M 28 50 L 34 55" stroke="#10b981" stroke-width="2" stroke-linecap="round"/>
+    <path d="M 37 48 Q 42 48 42 53 Q 42 58 37 58" stroke="#10b981" stroke-width="2" stroke-linecap="round"/>
+
+    <!-- Ready text -->
+    <text x="35" y="75" text-anchor="middle" fill="#10b981" font-size="8" font-family="Arial, sans-serif" font-weight="bold">READY</text>
+
+    <!-- Notch -->
+    <rect x="25" y="3" width="20" height="5" rx="3" fill="#000000" opacity="0.5"/>
+  </g>
+
+  <!-- NFC Card approaching phone -->
+  <g id="nfcCard" transform="rotate(-25 340 270)">
+    <rect x="300" y="245" width="85" height="55" rx="6" fill="url(#cardGrad)" stroke="#ec4899" stroke-width="2"/>
+
+    <!-- Chip -->
+    <rect x="310" y="255" width="18" height="14" rx="2" fill="#fbbf24"/>
+    <line x1="313" y1="258" x2="313" y2="266" stroke="#000000" stroke-width="0.5" opacity="0.3"/>
+    <line x1="316" y1="258" x2="316" y2="266" stroke="#000000" stroke-width="0.5" opacity="0.3"/>
+    <line x1="319" y1="258" x2="319" y2="266" stroke="#000000" stroke-width="0.5" opacity="0.3"/>
+    <line x1="322" y1="258" x2="322" y2="266" stroke="#000000" stroke-width="0.5" opacity="0.3"/>
+    <line x1="325" y1="258" x2="325" y2="266" stroke="#000000" stroke-width="0.5" opacity="0.3"/>
+
+    <!-- Card details -->
+    <line x1="310" y1="278" x2="365" y2="278" stroke="#ffffff" stroke-width="2" opacity="0.5"/>
+    <line x1="310" y1="286" x2="350" y2="286" stroke="#ffffff" stroke-width="1.5" opacity="0.5"/>
+    <line x1="310" y1="291" x2="340" y2="291" stroke="#ffffff" stroke-width="1.5" opacity="0.5"/>
+
+    <!-- NFC symbol on card -->
+    <g transform="translate(365, 265)">
+      <path d="M 0 0 Q 8 0 8 8" stroke="#ffffff" stroke-width="1.5" fill="none" opacity="0.7"/>
+      <path d="M 0 4 Q 5 4 5 9" stroke="#ffffff" stroke-width="1.5" fill="none" opacity="0.7"/>
+      <circle cx="0" cy="10" r="1.5" fill="#ffffff" opacity="0.7"/>
+    </g>
+  </g>
+
+  <!-- Data transfer visualization (between card and phone) -->
+  <g id="dataTransfer">
+    <!-- Particles transferring -->
+    <circle cx="160" cy="270" r="3" fill="#10b981">
+      <animateMotion dur="1.5s" repeatCount="indefinite" path="M 0 0 L 140 10"/>
+      <animate attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="160" cy="275" r="2" fill="#3b82f6">
+      <animateMotion dur="1.8s" repeatCount="indefinite" path="M 0 0 L 140 8"/>
+      <animate attributeName="opacity" values="0;1;0" dur="1.8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="160" cy="280" r="2.5" fill="#ec4899">
+      <animateMotion dur="2s" repeatCount="indefinite" path="M 0 0 L 140 5"/>
+      <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Legs -->
+  <g id="legs">
+    <rect x="150" y="350" width="40" height="110" rx="16" fill="url(#robotBody)" stroke="#6d28d9" stroke-width="3"/>
+    <rect x="210" y="350" width="40" height="110" rx="16" fill="url(#robotBody)" stroke="#6d28d9" stroke-width="3"/>
+
+    <!-- Feet -->
+    <ellipse cx="170" cy="465" rx="30" ry="17" fill="#6d28d9"/>
+    <ellipse cx="230" cy="465" rx="30" ry="17" fill="#6d28d9"/>
+  </g>
+
+  <!-- Success checkmark floating -->
+  <g id="successIndicator" opacity="0.7">
+    <circle cx="120" cy="180" r="12" fill="#10b981" opacity="0.3"/>
+    <path d="M 115 180 L 118 183 L 125 176" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+
+  <!-- Floating geometric shapes -->
+  <polygon points="65,120 72,135 58,135" fill="#a855f7" opacity="0.4"/>
+  <rect x="330" y="380" width="12" height="12" rx="2" fill="#ec4899" opacity="0.4"/>
+  <circle cx="75" cy="400" r="5" fill="#3b82f6" opacity="0.4"/>
+</svg>

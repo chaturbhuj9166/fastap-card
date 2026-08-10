@@ -1,0 +1,108 @@
+<svg width="400" height="500" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Definitions for gradients -->
+  <defs>
+    <linearGradient id="robotGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7c3aed;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="cardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#a855f7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f472b6;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="chipGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f97316;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="glowGradient">
+      <stop offset="0%" style="stop-color:#7c3aed;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Glow effect behind robot -->
+  <ellipse cx="200" cy="300" rx="150" ry="100" fill="url(#glowGradient)" opacity="0.5"/>
+
+  <!-- Robot body -->
+  <g id="robot">
+    <!-- Head -->
+    <rect x="150" y="80" width="100" height="90" rx="20" fill="url(#robotGradient)" stroke="#6d28d9" stroke-width="3"/>
+
+    <!-- Antenna -->
+    <line x1="200" y1="80" x2="200" y2="50" stroke="#ec4899" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="200" cy="45" r="8" fill="#ec4899"/>
+
+    <!-- NFC signal waves from antenna -->
+    <path d="M 200 45 Q 180 35 170 25" stroke="#ec4899" stroke-width="2" fill="none" opacity="0.6"/>
+    <path d="M 200 45 Q 220 35 230 25" stroke="#ec4899" stroke-width="2" fill="none" opacity="0.6"/>
+    <path d="M 200 45 Q 175 30 165 15" stroke="#ec4899" stroke-width="1.5" fill="none" opacity="0.4"/>
+    <path d="M 200 45 Q 225 30 235 15" stroke="#ec4899" stroke-width="1.5" fill="none" opacity="0.4"/>
+
+    <!-- Eyes -->
+    <circle cx="175" cy="110" r="12" fill="#ffffff"/>
+    <circle cx="225" cy="110" r="12" fill="#ffffff"/>
+    <circle cx="177" cy="112" r="7" fill="#6d28d9"/>
+    <circle cx="227" cy="112" r="7" fill="#6d28d9"/>
+
+    <!-- Smile -->
+    <path d="M 170 140 Q 200 155 230 140" stroke="#ffffff" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+    <!-- NFC chip on forehead -->
+    <rect x="190" y="95" width="20" height="15" rx="2" fill="url(#chipGradient)" stroke="#f97316" stroke-width="1"/>
+    <line x1="193" y1="98" x2="193" y2="107" stroke="#ffffff" stroke-width="1" opacity="0.7"/>
+    <line x1="197" y1="98" x2="197" y2="107" stroke="#ffffff" stroke-width="1" opacity="0.7"/>
+    <line x1="201" y1="98" x2="201" y2="107" stroke="#ffffff" stroke-width="1" opacity="0.7"/>
+    <line x1="205" y1="98" x2="205" y2="107" stroke="#ffffff" stroke-width="1" opacity="0.7"/>
+
+    <!-- Body/Torso -->
+    <rect x="130" y="180" width="140" height="150" rx="25" fill="url(#robotGradient)" stroke="#6d28d9" stroke-width="3"/>
+
+    <!-- Chest panel -->
+    <rect x="155" y="210" width="90" height="90" rx="10" fill="#ffffff" opacity="0.15"/>
+
+    <!-- NFC symbol on chest -->
+    <g transform="translate(200, 255)">
+      <path d="M -25 -20 L -25 20 M -25 -20 L -10 -5 M -25 0 L -10 15" stroke="#ffffff" stroke-width="3" stroke-linecap="round" fill="none"/>
+      <path d="M 0 -15 Q 15 -15 15 0 Q 15 15 0 15" stroke="#ffffff" stroke-width="3" stroke-linecap="round" fill="none"/>
+      <circle cx="0" cy="0" r="20" stroke="#ffffff" stroke-width="2" fill="none" opacity="0.5"/>
+      <circle cx="0" cy="0" r="28" stroke="#ffffff" stroke-width="2" fill="none" opacity="0.3"/>
+    </g>
+
+    <!-- Arms -->
+    <!-- Left arm -->
+    <rect x="80" y="200" width="40" height="100" rx="15" fill="url(#robotGradient)" stroke="#6d28d9" stroke-width="3"/>
+    <circle cx="100" cy="310" r="20" fill="url(#robotGradient)" stroke="#6d28d9" stroke-width="3"/>
+
+    <!-- Right arm holding NFC card -->
+    <rect x="280" y="200" width="40" height="100" rx="15" fill="url(#robotGradient)" stroke="#6d28d9" stroke-width="3"/>
+    <circle cx="300" cy="310" r="20" fill="url(#robotGradient)" stroke="#6d28d9" stroke-width="3"/>
+
+    <!-- NFC Card in hand -->
+    <g transform="rotate(-15 340 280)">
+      <rect x="310" y="240" width="80" height="50" rx="5" fill="url(#cardGradient)" stroke="#a855f7" stroke-width="2"/>
+      <!-- Card chip -->
+      <rect x="320" y="250" width="15" height="12" rx="2" fill="url(#chipGradient)"/>
+      <!-- Card lines -->
+      <line x1="320" y1="270" x2="360" y2="270" stroke="#ffffff" stroke-width="2" opacity="0.5"/>
+      <line x1="320" y1="277" x2="350" y2="277" stroke="#ffffff" stroke-width="2" opacity="0.5"/>
+
+      <!-- Wireless signal from card -->
+      <path d="M 340 240 Q 340 230 340 220" stroke="#f472b6" stroke-width="2" fill="none" opacity="0.6"/>
+      <path d="M 340 240 Q 350 230 355 220" stroke="#f472b6" stroke-width="2" fill="none" opacity="0.4"/>
+      <path d="M 340 240 Q 330 230 325 220" stroke="#f472b6" stroke-width="2" fill="none" opacity="0.4"/>
+    </g>
+
+    <!-- Legs -->
+    <rect x="155" y="340" width="35" height="110" rx="12" fill="url(#robotGradient)" stroke="#6d28d9" stroke-width="3"/>
+    <rect x="210" y="340" width="35" height="110" rx="12" fill="url(#robotGradient)" stroke="#6d28d9" stroke-width="3"/>
+
+    <!-- Feet -->
+    <ellipse cx="172" cy="455" rx="25" ry="15" fill="#6d28d9"/>
+    <ellipse cx="227" cy="455" rx="25" ry="15" fill="#6d28d9"/>
+  </g>
+
+  <!-- Floating geometric shapes around robot -->
+  <circle cx="80" cy="150" r="8" fill="#ec4899" opacity="0.4"/>
+  <rect x="320" y="140" width="15" height="15" rx="3" fill="#a855f7" opacity="0.4"/>
+  <circle cx="90" cy="350" r="6" fill="#7c3aed" opacity="0.4"/>
+  <polygon points="340,360 350,380 330,380" fill="#f472b6" opacity="0.4"/>
+</svg>

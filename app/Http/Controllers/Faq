@@ -1,0 +1,55 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\Faq;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use Crypt;
+use Session;
+
+class Faq extends Controller
+{
+ 
+public function view_faq()
+{
+    return view('admin/faq/index');
+}
+
+public function add_faq()
+{
+    return view('admin/faq/add');
+}
+
+public function faq_data(Request $request)
+{
+    $request->validate([
+'name'=>'required',
+'description'=>'required',
+]);
+
+$faq =new Faq;
+$faq->name=$request->name;
+$faq->description=$request->description;
+
+ if($request->hasfile('image'))
+        {
+            $file = $request->file('image');
+            $extenstion = $file->getClientOriginalExtension();
+            $filename = time().'.'.$extenstion;
+            $file->move('uploads/faq/', $filename);
+            $student->image = $filename;
+        }
+if($pro->save()){
+return redirect('admin/faq/index')->with('success','Faq Added Susscssfully');
+}
+else{
+    return back()->with('error','Error');
+}
+
+        
+    
+}
+ 
+}

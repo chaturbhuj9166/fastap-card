@@ -1,0 +1,43 @@
+.landing_nav img{
+	width: 150px;
+}
+
+.banner_main_section .banner_last img {
+    width: 100%;
+}
+.banner_main_section {
+    background-color: #a46be9;
+    height: 98vh;
+    padding-top: 112px;
+}
+.login_page_design {
+    width: 85%;
+    background: #fff;
+    margin-top: 15px !important;
+    margin-bottom: 15px !important;
+    margin: 0 auto;
+    
+    border-radius: 7px;
+}
+
+.iner_padding{
+    padding: 12px 20px;
+}
+
+.login_page_design h3 {
+    background: #a46be9;
+    padding-bottom: 5px;
+    color: #fff;
+}
+
+.iner_padding .iti.iti--allow-dropdown.iti--separate-dial-code {
+    width: 100%;
+}
+
+.password_hide{
+    display: none;
+}
+
+.preferotp{
+    display: none;
+}

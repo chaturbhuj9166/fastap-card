@@ -1,0 +1,101 @@
+<svg width="400" height="450" viewBox="0 0 400 450" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="testGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7c3aed;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Floating Cards Background -->
+  <g opacity="0.2">
+    <rect x="50" y="60" width="80" height="50" rx="6" fill="#a855f7" transform="rotate(-15 90 85)"/>
+    <rect x="270" y="80" width="80" height="50" rx="6" fill="#ec4899" transform="rotate(12 310 105)"/>
+    <rect x="150" y="340" width="80" height="50" rx="6" fill="#7c3aed" transform="rotate(8 190 365)"/>
+  </g>
+
+  <!-- Main Character - Happy Person with NFC Card -->
+  <g transform="translate(100, 80)">
+    <!-- Head -->
+    <circle cx="100" cy="80" r="45" fill="url(#testGrad)"/>
+
+    <!-- Eyes -->
+    <circle cx="85" cy="75" r="5" fill="#ffffff"/>
+    <circle cx="115" cy="75" r="5" fill="#ffffff"/>
+    <circle cx="87" cy="75" r="3" fill="#1e293b"/>
+    <circle cx="117" cy="75" r="3" fill="#1e293b"/>
+
+    <!-- Smile -->
+    <path d="M 75 85 Q 100 100 125 85" stroke="#ffffff" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+    <!-- Body -->
+    <rect x="70" y="125" width="60" height="80" rx="8" fill="#a855f7"/>
+
+    <!-- Arms -->
+    <rect x="45" y="140" width="20" height="60" rx="10" fill="#a855f7" transform="rotate(-20 55 170)"/>
+    <rect x="135" y="140" width="20" height="60" rx="10" fill="#a855f7" transform="rotate(30 145 170)"/>
+
+    <!-- Legs -->
+    <rect x="75" y="200" width="20" height="70" rx="10" fill="#7c3aed"/>
+    <rect x="105" y="200" width="20" height="70" rx="10" fill="#7c3aed"/>
+
+    <!-- NFC Card in hand -->
+    <g transform="translate(140, 180) rotate(20)">
+      <rect x="0" y="0" width="60" height="38" rx="4" fill="#ffffff" stroke="#7c3aed" stroke-width="2"/>
+      <rect x="5" y="5" width="20" height="15" rx="2" fill="#fbbf24"/>
+      <line x1="7" y1="7" x2="7" y2="18" stroke="#000000" stroke-width="0.5" opacity="0.3"/>
+      <line x1="10" y1="7" x2="10" y2="18" stroke="#000000" stroke-width="0.5" opacity="0.3"/>
+      <line x1="13" y1="7" x2="13" y2="18" stroke="#000000" stroke-width="0.5" opacity="0.3"/>
+      <line x1="16" y1="7" x2="16" y2="18" stroke="#000000" stroke-width="0.5" opacity="0.3"/>
+      <line x1="19" y1="7" x2="19" y2="18" stroke="#000000" stroke-width="0.5" opacity="0.3"/>
+      <line x1="22" y1="7" x2="22" y2="18" stroke="#000000" stroke-width="0.5" opacity="0.3"/>
+      <text x="30" y="15" font-family="Arial, sans-serif" font-size="6" fill="#7c3aed" font-weight="bold">FASTAP</text>
+      <g transform="translate(48, 8)">
+        <path d="M 0 0 Q 6 0 6 6" stroke="#7c3aed" stroke-width="1" fill="none"/>
+        <path d="M 0 3 Q 3 3 3 6" stroke="#7c3aed" stroke-width="1" fill="none"/>
+        <circle cx="0" cy="7" r="1" fill="#7c3aed"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- Rating Stars -->
+  <g transform="translate(80, 320)">
+    <g transform="translate(0, 0)">
+      <polygon points="12,2 15,10 24,10 17,15 20,23 12,18 4,23 7,15 0,10 9,10" fill="#fbbf24"/>
+    </g>
+    <g transform="translate(35, 0)">
+      <polygon points="12,2 15,10 24,10 17,15 20,23 12,18 4,23 7,15 0,10 9,10" fill="#fbbf24"/>
+    </g>
+    <g transform="translate(70, 0)">
+      <polygon points="12,2 15,10 24,10 17,15 20,23 12,18 4,23 7,15 0,10 9,10" fill="#fbbf24"/>
+    </g>
+    <g transform="translate(105, 0)">
+      <polygon points="12,2 15,10 24,10 17,15 20,23 12,18 4,23 7,15 0,10 9,10" fill="#fbbf24"/>
+    </g>
+    <g transform="translate(140, 0)">
+      <polygon points="12,2 15,10 24,10 17,15 20,23 12,18 4,23 7,15 0,10 9,10" fill="#fbbf24"/>
+    </g>
+  </g>
+
+  <!-- Quote Mark -->
+  <text x="280" y="160" font-family="Georgia, serif" font-size="100" fill="#ec4899" opacity="0.15">"</text>
+
+  <!-- Feedback Bubbles -->
+  <g transform="translate(50, 390)">
+    <circle cx="0" cy="0" r="8" fill="#10b981"/>
+    <path d="M -3 0 L -1 2 L 3 -2" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+  <g transform="translate(100, 400)">
+    <circle cx="0" cy="0" r="8" fill="#10b981"/>
+    <path d="M -3 0 L -1 2 L 3 -2" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+  <g transform="translate(150, 395)">
+    <circle cx="0" cy="0" r="8" fill="#10b981"/>
+    <path d="M -3 0 L -1 2 L 3 -2" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+
+  <!-- Thumbs Up -->
+  <g transform="translate(320, 360)">
+    <path d="M 10 20 L 10 50 L 30 50 L 30 20 C 30 20 35 15 35 10 C 35 5 30 0 25 0 C 20 0 18 5 18 10 C 18 12 19 14 20 15 L 22 18 L 15 18 C 12 18 10 20 10 23 Z" fill="#ec4899"/>
+    <rect x="0" y="25" width="12" height="25" rx="3" fill="#a855f7"/>
+  </g>
+</svg>

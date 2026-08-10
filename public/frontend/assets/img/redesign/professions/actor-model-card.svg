@@ -1,0 +1,45 @@
+<svg width="320" height="200" viewBox="0 0 320 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="actorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f43f5e;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#e11d48;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#be123c;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <rect x="5" y="8" width="310" height="190" rx="15" fill="#000000" opacity="0.1"/>
+  <rect x="0" y="0" width="310" height="190" rx="15" fill="url(#actorGrad)" stroke="#be123c" stroke-width="2"/>
+
+  <rect x="0" y="0" width="310" height="8" rx="15" fill="#7c3aed"/>
+  <rect x="0" y="182" width="310" height="8" rx="15" fill="#ec4899" opacity="0.5"/>
+
+  <rect x="25" y="30" width="45" height="35" rx="4" fill="#fbbf24" stroke="#f97316" stroke-width="1.5"/>
+  <line x1="30" y1="35" x2="30" y2="60" stroke="#000000" stroke-width="1" opacity="0.3"/>
+  <line x1="38" y1="35" x2="38" y2="60" stroke="#000000" stroke-width="1" opacity="0.3"/>
+  <line x1="46" y1="35" x2="46" y2="60" stroke="#000000" stroke-width="1" opacity="0.3"/>
+  <line x1="54" y1="35" x2="54" y2="60" stroke="#000000" stroke-width="1" opacity="0.3"/>
+  <line x1="62" y1="35" x2="62" y2="60" stroke="#000000" stroke-width="1" opacity="0.3"/>
+
+  <g transform="translate(210, 40)">
+    <polygon points="25,0 50,25 37.5,25 37.5,50 12.5,50 12.5,25 0,25" fill="#ffffff" opacity="0.9"/>
+    <circle cx="25" cy="65" r="8" fill="#ffffff" opacity="0.9"/>
+    <circle cx="15" cy="65" r="3" fill="#f43f5e"/>
+    <circle cx="35" cy="65" r="3" fill="#f43f5e"/>
+  </g>
+
+  <text x="25" y="110" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#ffffff">TALENT PORTFOLIO</text>
+  <text x="25" y="132" font-family="Arial, sans-serif" font-size="14" fill="#ffffff" opacity="0.9">Actor and Model</text>
+  <text x="25" y="150" font-family="Arial, sans-serif" font-size="12" fill="#ffffff" opacity="0.8">Showcase Your Talent</text>
+
+  <line x1="25" y1="165" x2="180" y2="165" stroke="#ffffff" stroke-width="1.5" opacity="0.6"/>
+  <line x1="25" y1="173" x2="160" y2="173" stroke="#ffffff" stroke-width="1.5" opacity="0.6"/>
+
+  <g transform="translate(270, 155)">
+    <path d="M 0 0 Q 12 0 12 12" stroke="#ffffff" stroke-width="2" fill="none" opacity="0.8"/>
+    <path d="M 0 6 Q 7 6 7 13" stroke="#ffffff" stroke-width="2" fill="none" opacity="0.8"/>
+    <circle cx="0" cy="15" r="2" fill="#ffffff" opacity="0.8"/>
+  </g>
+
+  <rect x="195" y="155" width="60" height="20" rx="10" fill="#ffffff" opacity="0.2"/>
+  <text x="225" y="169" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#ffffff" text-anchor="middle">TALENT</text>
+</svg>
