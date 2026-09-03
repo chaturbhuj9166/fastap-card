@@ -591,7 +591,7 @@ public function raf_create_vcard($cust)
     
     public function allproductshow(Request $request, $id)
     {
-        $products['allpro'] = Product::where('status','=','1')->where('catagory_id',$id)->get();
+        $products['allpro'] = Product::where('status','=','1')->where('category_id',$id)->get();
    
        return view('frontend.products',$products);
 
@@ -834,7 +834,10 @@ public function setcoupon(Request $request){
         $d['coupon']= (int)$request->session()->get('coupondata') ?? 0;
         $user_id = $request->session()->get('FRONT_USER_ID');
         if(!empty($user_id)){
-            $d['cartdata'] = Cart::join('products','products.id','=','carts.product_id')->where('user_id',$user_id)->get();
+            // 'carts.' matters: the join brings a user_id in from products as well, so an
+            // unqualified name is ambiguous and MySQL refuses the query. cartlist() above
+            // writes it the same way.
+            $d['cartdata'] = Cart::join('products','products.id','=','carts.product_id')->where('carts.user_id',$user_id)->get();
             return view('frontend.checkout',$d);
         }else{
              return redirect('Login'); 

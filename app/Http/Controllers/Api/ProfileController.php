@@ -91,7 +91,7 @@ class ProfileController extends Controller
     }
     
     public function getsmartcards(){
-        $user=product::where('catagory_id',6)->orwhere('catagory_id',9)->get();
+        $user=product::where('category_id',6)->orwhere('category_id',9)->get();
            if($user){
             $res=[
                 'data'=>$user,
@@ -115,7 +115,7 @@ class ProfileController extends Controller
     
     
       public function getprofessionalcards(){
-        $user=product::where('catagory_id',7)->get();
+        $user=product::where('category_id',7)->get();
            if($user){
             $res=[
                 'data'=>$user,

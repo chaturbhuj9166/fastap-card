@@ -670,7 +670,7 @@
                                 <li>
                                     <a href="{{ url('/Product/'.$cat->id) }}">
                                         {{ $cat->categroy }}
-                                        <span class="count">{{ App\Models\Product::where('catagory_id', $cat->id)->where('status', 1)->count() }}</span>
+                                        <span class="count">{{ App\Models\Product::where('category_id', $cat->id)->where('status', 1)->count() }}</span>
                                     </a>
                                 </li>
                             @endforeach
@@ -736,7 +736,7 @@
                     <div class="products-grid stagger-animation">
                         @foreach($product as $item)
                             @php
-                                $category = App\Models\category::find($item->catagory_id);
+                                $category = App\Models\category::find($item->category_id);
                                 $discount = $item->pro_mrp > 0 ? round((($item->pro_mrp - $item->pro_price) / $item->pro_mrp) * 100) : 0;
                             @endphp
                             <div class="product-card fade-up">

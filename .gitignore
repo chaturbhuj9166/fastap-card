@@ -27,3 +27,19 @@ error_log
 .env
 .env.*
 !.env.example
+
+# ─── Junk / backup leftovers (kaam ke nahi) ───
+.ftpquota
+composer.jsonbk
+composer.lockbk
+*.bak
+*.bk
+*.old
+*.orig
+*.tmp
+
+# Stale partial dump — isme admin password hashes + customer rows hain
+fastap.sql
+
+# Local dev helper (machine-specific)
+router-local.php

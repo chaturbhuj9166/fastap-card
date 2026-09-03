@@ -66,7 +66,7 @@
         <div class="row g-4">
           @foreach ($product as $item)
   @php
-    $category = App\Models\category::find($item->catagory_id);
+    $category = App\Models\category::find($item->category_id);
   @endphp
   <div class="col-sm-6">
     <div class="card shadow-sm" style="height: 100%; border: 1px solid #eee; transition: 0.3s ease;">
